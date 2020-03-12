@@ -12,7 +12,7 @@ namespace PackageVersions;
  */
 final class Versions
 {
-    public const ROOT_PACKAGE_NAME = 'symfony/website-skeleton';
+    public const ROOT_PACKAGE_NAME = '__root__';
     /**
      * Array of all available composer packages.
      * Dont read this array from your calling code, but use the \PackageVersions\Versions::getVersion() method instead.
@@ -21,6 +21,7 @@ final class Versions
      * @internal
      */
     public const VERSIONS          = array (
+  'cocur/slugify' => 'v4.0.0@3f1ffc300f164f23abe8b64ffb3f92d35cec8307',
   'doctrine/annotations' => 'v1.8.0@904dca4eb10715b92569fbcd79e201d5c349b6bc',
   'doctrine/cache' => '1.10.0@382e7f4db9a12dc6c19431743a2b096041bcdd62',
   'doctrine/collections' => '1.6.4@6b1e4b2b66f6d6e49983cebfe23a21b7ccc5b0d7',
@@ -127,14 +128,14 @@ final class Versions
   'symfony/profiler-pack' => 'v1.0.4@99c4370632c2a59bb0444852f92140074ef02209',
   'symfony/test-pack' => 'v1.0.6@ff87e800a67d06c423389f77b8209bc9dc469def',
   'symfony/web-profiler-bundle' => 'v5.0.5@209b76b879fee706fecbd8ad2113d810322ab62a',
-  'paragonie/random_compat' => '2.*@',
-  'symfony/polyfill-ctype' => '*@',
-  'symfony/polyfill-iconv' => '*@',
-  'symfony/polyfill-php72' => '*@',
-  'symfony/polyfill-php71' => '*@',
-  'symfony/polyfill-php70' => '*@',
-  'symfony/polyfill-php56' => '*@',
-  'symfony/website-skeleton' => 'v5.0.99@',
+  'paragonie/random_compat' => '2.*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  'symfony/polyfill-ctype' => '*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  'symfony/polyfill-iconv' => '*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  'symfony/polyfill-php72' => '*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  'symfony/polyfill-php71' => '*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  'symfony/polyfill-php70' => '*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  'symfony/polyfill-php56' => '*@b01fc7b90c151ee60b281a69ddac83febdc14566',
+  '__root__' => 'dev-devFlo@b01fc7b90c151ee60b281a69ddac83febdc14566',
 );
 
     private function __construct()
