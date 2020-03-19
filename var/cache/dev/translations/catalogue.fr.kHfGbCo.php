@@ -120,6 +120,21 @@ $catalogue = new MessageCatalogue('fr', array (
     'Account is disabled.' => 'Le compte est désactivé.',
     'Account is locked.' => 'Le compte est bloqué.',
   ),
+  'forms' => 
+  array (
+    'City' => 'Ville',
+    'Address' => 'Adresse',
+    'Description' => 'Description',
+    'Surface' => 'Surface',
+    'Rooms' => 'Pièces',
+    'Bedrooms' => 'Chambres',
+    'Floor' => 'Etages',
+    'Price' => 'Prix',
+    'Heat' => 'Chauffage',
+    'Sold' => 'Vendu',
+    'Postal code' => 'Code-Postal',
+    'Title' => 'Titre',
+  ),
 ));
 
 $catalogueEn = new MessageCatalogue('en', array (
