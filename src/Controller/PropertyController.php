@@ -16,13 +16,13 @@ class PropertyController extends AbstractController
      * @var PropertyRepository
      */
 
-     private $em;
+    private $em;
 
-     public function __construct(PropertyRepository $repository, EntityManagerInterface $em)
-     {
-         $this->repository = $repository;
-         $this->em = $em;
-     }
+    public function __construct(PropertyRepository $repository, EntityManagerInterface $em)
+    {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
 
     /**
      * @Route ("/biens", name="property.index")
@@ -30,7 +30,7 @@ class PropertyController extends AbstractController
     public function index(): Response
     {
         return $this->render("property/index.html.twig", [
-            'current_menu' => 'properties'
+            'current_menu' => 'properties',
         ]);
     }
 
