@@ -16,16 +16,20 @@
                 <li class="nav-item">
                     <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}" href="{{ path('property.index') }}">Acheter <span class="sr-only">(current)</span></a>
                 </li> 
-            </ul>    
-
-            {% if app.user %}
-                <div class="navbar-nav">
-                    <div class="li nav-item">
-                        <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
+                
+                {% if app.user %}
+                    <div class="navbar-nav">
+                        <div class="li nav-item">
+                            <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
                         </div>
-                    </div>
-                </div>                
-            {% endif %}
+                    </div> 
+                {% else %}  
+                    <li class="nav-item">
+                        <a href="{{ path('login') }}" class="nav-link">Se connecter</a>
+                    </li>              
+                {% endif %}
+            </ul>    
+            
         </div>
     </nav>
         {% block body %}{% endblock %}
