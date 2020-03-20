@@ -75,15 +75,42 @@ class __TwigTemplate_742b5c9a54a8c31b890487f066635285b4dfb6db44e2822ee2f8f73a456
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("property.index");
         echo "\">Acheter <span class=\"sr-only\">(current)</span></a>
             </li>     
-        </div>
+            </ul>
+            ";
+        // line 21
+        if (twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 21, $this->source); })()), "user", [], "any", false, false, false, 21)) {
+            // line 22
+            echo "                <ul class=\"navbar-nav\">
+                    <li class=\"nav-item\">
+                        <a href=\"";
+            // line 24
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("logout");
+            echo "\">Se déconnecter</a>
+                    </li>
+                </ul>
+            ";
+        } else {
+            // line 28
+            echo "                <ul class=\"navbar-nav\">
+                    <li class=\"nav-item\">
+                        <a href=\"";
+            // line 30
+            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("login");
+            echo "\" class=\"nav-link\">Se connecter</a>
+                    </li>
+                </ul>
+            ";
+        }
+        // line 34
+        echo "        </div>
     </nav>
         ";
-        // line 22
+        // line 36
         $this->displayBlock('body', $context, $blocks);
-        // line 23
+        // line 37
         echo "        ";
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 24
+        // line 38
         echo "        <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js\" integrity=\"sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6\" crossorigin=\"anonymous\"></script>    
         <script src=\"https://code.jquery.com/jquery-3.4.1.slim.min.js\" integrity=\"sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n\" crossorigin=\"anonymous\"></script>
         <script src=\"https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js\" integrity=\"sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo\" crossorigin=\"anonymous\"></script>
@@ -117,7 +144,7 @@ class __TwigTemplate_742b5c9a54a8c31b890487f066635285b4dfb6db44e2822ee2f8f73a456
 
     }
 
-    // line 22
+    // line 36
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -135,7 +162,7 @@ class __TwigTemplate_742b5c9a54a8c31b890487f066635285b4dfb6db44e2822ee2f8f73a456
 
     }
 
-    // line 23
+    // line 37
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -165,7 +192,7 @@ class __TwigTemplate_742b5c9a54a8c31b890487f066635285b4dfb6db44e2822ee2f8f73a456
 
     public function getDebugInfo()
     {
-        return array (  139 => 23,  121 => 22,  102 => 5,  87 => 24,  84 => 23,  82 => 22,  71 => 18,  60 => 10,  52 => 5,  46 => 1,);
+        return array (  166 => 37,  148 => 36,  129 => 5,  114 => 38,  111 => 37,  109 => 36,  105 => 34,  98 => 30,  94 => 28,  87 => 24,  83 => 22,  81 => 21,  71 => 18,  60 => 10,  52 => 5,  46 => 1,);
     }
 
     public function getSourceContext()
@@ -189,6 +216,20 @@ class __TwigTemplate_742b5c9a54a8c31b890487f066635285b4dfb6db44e2822ee2f8f73a456
             <li class=\"nav-item\">
                 <a class=\"nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}\" href=\"{{ path('property.index') }}\">Acheter <span class=\"sr-only\">(current)</span></a>
             </li>     
+            </ul>
+            {% if app.user %}
+                <ul class=\"navbar-nav\">
+                    <li class=\"nav-item\">
+                        <a href=\"{{ path (\"logout\") }}\">Se déconnecter</a>
+                    </li>
+                </ul>
+            {% else %}
+                <ul class=\"navbar-nav\">
+                    <li class=\"nav-item\">
+                        <a href=\"{{ path('login') }}\" class=\"nav-link\">Se connecter</a>
+                    </li>
+                </ul>
+            {% endif %}
         </div>
     </nav>
         {% block body %}{% endblock %}

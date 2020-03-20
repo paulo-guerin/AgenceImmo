@@ -18,6 +18,8 @@
       <parameter key="DoctrineMigrationsBundle">Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle</parameter>
       <parameter key="SecurityBundle">Symfony\Bundle\SecurityBundle\SecurityBundle</parameter>
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
+      <parameter key="DoctrineFixturesBundle">Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle</parameter>
+      <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -63,6 +65,14 @@
       <parameter key="MakerBundle" type="collection">
         <parameter key="path">C:\wamp64\www\AgenceImmo\vendor\symfony\maker-bundle\src</parameter>
         <parameter key="namespace">Symfony\Bundle\MakerBundle</parameter>
+      </parameter>
+      <parameter key="DoctrineFixturesBundle" type="collection">
+        <parameter key="path">C:\wamp64\www\AgenceImmo\vendor\doctrine\doctrine-fixtures-bundle</parameter>
+        <parameter key="namespace">Doctrine\Bundle\FixturesBundle</parameter>
+      </parameter>
+      <parameter key="KnpPaginatorBundle" type="collection">
+        <parameter key="path">C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle</parameter>
+        <parameter key="namespace">Knp\Bundle\PaginatorBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -218,6 +228,10 @@
     <parameter key="security.authentication.session_strategy.strategy">migrate</parameter>
     <parameter key="security.access.always_authenticate_before_granting">false</parameter>
     <parameter key="security.authentication.hide_user_not_found">true</parameter>
+    <parameter key="knp_paginator.template.pagination">@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig</parameter>
+    <parameter key="knp_paginator.template.filtration">@KnpPaginator/Pagination/filtration.html.twig</parameter>
+    <parameter key="knp_paginator.template.sortable">@KnpPaginator/Pagination/sortable_link.html.twig</parameter>
+    <parameter key="knp_paginator.page_range">5</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -331,10 +345,34 @@
         <argument type="service" id=".service_locator.pNNo5z3.App\Controller\PropertyController"/>
       </call>
     </service>
+    <service id="App\Controller\SecurityController" class="App\Controller\SecurityController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.pNNo5z3.App\Controller\SecurityController"/>
+      </call>
+    </service>
+    <service id="App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+    </service>
+    <service id="App\DataFixtures\PropertyFixtures" class="App\DataFixtures\PropertyFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+    </service>
+    <service id="App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true">
+      <tag name="doctrine.fixture.orm"/>
+      <argument type="service" id="security.user_password_encoder.generic"/>
+    </service>
+    <service id="App\Form\PropertySearchType" class="App\Form\PropertySearchType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\PropertyType" class="App\Form\PropertyType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Repository\PropertyRepository" class="App\Repository\PropertyRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -738,6 +776,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\PropertySearchType</argument>
         <argument>App\Form\PropertyType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
@@ -1060,7 +1099,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.KO.NkYA"/>
+      <argument type="service" id=".service_locator.t4CDoQc"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -1439,6 +1478,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ar.xliff</argument>
           </argument>
           <argument key="az" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.az.xlf</argument>
@@ -1454,6 +1494,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.bg.xliff</argument>
           </argument>
           <argument key="ca" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
@@ -1464,6 +1505,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.cs.xliff</argument>
           </argument>
           <argument key="cy" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.cy.xlf</argument>
@@ -1472,11 +1514,13 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.da.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.da.xliff</argument>
           </argument>
           <argument key="de" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.de.xliff</argument>
           </argument>
           <argument key="el" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
@@ -1487,11 +1531,13 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.en.xliff</argument>
           </argument>
           <argument key="es" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.es.xliff</argument>
           </argument>
           <argument key="et" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
@@ -1501,11 +1547,13 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.eu.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.eu.xliff</argument>
           </argument>
           <argument key="fa" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.fa.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fa.xliff</argument>
           </argument>
           <argument key="fi" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
@@ -1515,7 +1563,9 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fr.xliff</argument>
             <argument>C:\wamp64\www\AgenceImmo/translations\forms.fr.yaml</argument>
+            <argument>C:\wamp64\www\AgenceImmo/translations\knpPaginationBundle.fr.yaml</argument>
           </argument>
           <argument key="gl" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
@@ -1536,6 +1586,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.hu.xliff</argument>
           </argument>
           <argument key="hy" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.hy.xlf</argument>
@@ -1545,16 +1596,19 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.id.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.id.xliff</argument>
           </argument>
           <argument key="it" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.it.xliff</argument>
           </argument>
           <argument key="ja" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ja.xliff</argument>
           </argument>
           <argument key="lb" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.lb.xlf</argument>
@@ -1565,6 +1619,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.lt.xliff</argument>
           </argument>
           <argument key="lv" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
@@ -1584,6 +1639,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.nl.xliff</argument>
           </argument>
           <argument key="nn" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.nn.xlf</argument>
@@ -1594,11 +1650,13 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.no.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.no.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.no.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.no.xliff</argument>
           </argument>
           <argument key="pl" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.pl.xliff</argument>
           </argument>
           <argument key="pt" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
@@ -1608,16 +1666,19 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.pt_BR.xliff</argument>
           </argument>
           <argument key="ro" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.ro.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ro.xliff</argument>
           </argument>
           <argument key="ru" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ru.xliff</argument>
           </argument>
           <argument key="sk" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
@@ -1646,6 +1707,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.sv.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.sv.xliff</argument>
           </argument>
           <argument key="th" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
@@ -1665,6 +1727,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.uk.xliff</argument>
           </argument>
           <argument key="vi" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
@@ -1682,11 +1745,18 @@
           <argument key="pt_PT" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations\security.pt_PT.xlf</argument>
           </argument>
+          <argument key="ky" type="collection">
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ky.xliff</argument>
+          </argument>
+          <argument key="sw" type="collection">
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.sw.xliff</argument>
+          </argument>
         </argument>
         <argument key="scanned_directories" type="collection">
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations</argument>
+          <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\framework-bundle/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\twig-bundle/translations</argument>
@@ -1699,12 +1769,14 @@
           <argument>C:\wamp64\www\AgenceImmo\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-bundle/translations</argument>
           <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\maker-bundle\src/translations</argument>
+          <argument>C:\wamp64\www\AgenceImmo\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\validator/Resources/translations</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\form/Resources/translations</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-core/Resources/translations</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/translations</argument>
             <argument>translations</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\framework-bundle/translations</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\twig-bundle/translations</argument>
@@ -1717,6 +1789,7 @@
             <argument>C:\wamp64\www\AgenceImmo\vendor\doctrine\doctrine-migrations-bundle/translations</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-bundle/translations</argument>
             <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\maker-bundle\src/translations</argument>
+            <argument>C:\wamp64\www\AgenceImmo\vendor\doctrine\doctrine-fixtures-bundle/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -2159,6 +2232,14 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
+        <argument>kernel.request</argument>
+        <argument type="collection">
+          <argument type="service" id="knp_paginator.subscriber.sliding_pagination"/>
+          <argument>onKernelRequest</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>kernel.response</argument>
         <argument type="collection">
           <argument type="service" id="response_listener"/>
@@ -2565,6 +2646,46 @@
           <argument>onConsoleTerminate</argument>
         </argument>
         <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>knp_pager.before</argument>
+        <argument type="collection">
+          <argument type="service" id="knp_paginator.subscriber.paginate"/>
+          <argument>before</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>knp_pager.pagination</argument>
+        <argument type="collection">
+          <argument type="service" id="knp_paginator.subscriber.paginate"/>
+          <argument>pagination</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>knp_pager.before</argument>
+        <argument type="collection">
+          <argument type="service" id="knp_paginator.subscriber.sortable"/>
+          <argument>before</argument>
+        </argument>
+        <argument>1</argument>
+      </call>
+      <call method="addListener">
+        <argument>knp_pager.before</argument>
+        <argument type="collection">
+          <argument type="service" id="knp_paginator.subscriber.filtration"/>
+          <argument>before</argument>
+        </argument>
+        <argument>1</argument>
+      </call>
+      <call method="addListener">
+        <argument>knp_pager.pagination</argument>
+        <argument type="collection">
+          <argument type="service" id="knp_paginator.subscriber.sliding_pagination"/>
+          <argument>pagination</argument>
+        </argument>
+        <argument>1</argument>
       </call>
     </service>
     <service id="debug.controller_resolver" class="Symfony\Component\HttpKernel\Controller\TraceableControllerResolver" public="false">
@@ -2992,6 +3113,9 @@
       <call method="addExtension">
         <argument type="service" id="doctrine.twig.doctrine_extension"/>
       </call>
+      <call method="addExtension">
+        <argument type="service" id="knp_paginator.twig.extension.pagination"/>
+      </call>
       <call method="addGlobal">
         <argument>app</argument>
         <argument type="service" id="twig.app_variable"/>
@@ -3084,6 +3208,14 @@
       <call method="addPath">
         <argument>C:\wamp64\www\AgenceImmo\vendor\symfony\security-bundle/Resources/views</argument>
         <argument>!Security</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/templates</argument>
+        <argument>KnpPaginator</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\wamp64\www\AgenceImmo\vendor\knplabs\knp-paginator-bundle/templates</argument>
+        <argument>!KnpPaginator</argument>
       </call>
       <call method="addPath">
         <argument>C:\wamp64\www\AgenceImmo/templates</argument>
@@ -3628,7 +3760,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.2odPO2A"/>
+      <argument type="service" id=".service_locator.89ChXjf"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -3930,6 +4062,7 @@
     </service>
     <service id="security.authentication.manager" class="Symfony\Component\Security\Core\Authentication\AuthenticationProviderManager" public="false">
       <argument type="iterator">
+        <argument type="service" id="security.authentication.provider.dao.main"/>
         <argument type="service" id="security.authentication.provider.anonymous.main"/>
       </argument>
       <argument>true</argument>
@@ -3945,7 +4078,17 @@
       <argument>none</argument>
     </service>
     <service id="security.encoder_factory.generic" class="Symfony\Component\Security\Core\Encoder\EncoderFactory" public="false">
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument key="App\Entity\User" type="collection">
+          <argument key="class">Symfony\Component\Security\Core\Encoder\NativePasswordEncoder</argument>
+          <argument key="arguments" type="collection">
+            <argument>null</argument>
+            <argument>null</argument>
+            <argument>12</argument>
+            <argument>1</argument>
+          </argument>
+        </argument>
+      </argument>
     </service>
     <service id="security.user_password_encoder.generic" class="Symfony\Component\Security\Core\Encoder\UserPasswordEncoder" public="false">
       <argument type="service" id="security.encoder_factory.generic"/>
@@ -4012,6 +4155,14 @@
       <argument type="service" id="request_stack" on-invalid="null"/>
       <argument type="service" id="router.default" on-invalid="null"/>
       <argument type="service" id="security.token_storage"/>
+      <call method="registerListener">
+        <argument>main</argument>
+        <argument>/logout</argument>
+        <argument>logout</argument>
+        <argument>_csrf_token</argument>
+        <argument>null</argument>
+        <argument>null</argument>
+      </call>
     </service>
     <service id="security.user.provider.missing" class="Symfony\Component\Security\Core\User\MissingUserProvider" public="false" abstract="true">
       <argument></argument>
@@ -4066,12 +4217,20 @@
       <argument type="service" id="security.authentication.retry_entry_point"/>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
     </service>
-    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap" public="false"/>
+    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap" public="false">
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.5dJADCx"/>
+        <argument type="collection">
+          <argument>ROLE_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+    </service>
     <service id="security.context_listener" class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
       <tag name="monolog.logger" channel="security"/>
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
-        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.from_database"/>
       </argument>
       <argument></argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -4334,8 +4493,11 @@
       <argument type="service" id="debug.event_dispatcher"/>
       <argument type="service" id="security.logout_url_generator"/>
     </service>
-    <service id="security.user.provider.concrete.users_in_memory" class="Symfony\Component\Security\Core\User\InMemoryUserProvider" public="false">
-      <argument type="collection"/>
+    <service id="security.user.provider.concrete.from_database" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+      <argument type="service" id="doctrine"/>
+      <argument>App\Entity\User</argument>
+      <argument>username</argument>
+      <argument>null</argument>
     </service>
     <service id="security.firewall.map.config.dev" class="Symfony\Bundle\SecurityBundle\Security\FirewallConfig" public="false">
       <argument>dev</argument>
@@ -4366,12 +4528,13 @@
       <argument>null</argument>
       <argument>true</argument>
       <argument>false</argument>
-      <argument>security.user.provider.concrete.users_in_memory</argument>
+      <argument>security.user.provider.concrete.from_database</argument>
       <argument>main</argument>
-      <argument>null</argument>
+      <argument>security.authentication.form_entry_point.main</argument>
       <argument>null</argument>
       <argument>null</argument>
       <argument type="collection">
+        <argument>form_login</argument>
         <argument>anonymous</argument>
       </argument>
       <argument>null</argument>
@@ -4379,7 +4542,7 @@
     <service id="security.context_listener.0" class="Symfony\Component\Security\Http\Firewall\ContextListener" public="false">
       <argument type="service" id="security.untracked_token_storage"/>
       <argument type="iterator">
-        <argument type="service" id="security.user.provider.concrete.users_in_memory"/>
+        <argument type="service" id="security.user.provider.concrete.from_database"/>
       </argument>
       <argument>main</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -4389,6 +4552,92 @@
         <argument type="service" id="security.token_storage"/>
         <argument>enableUsageTracking</argument>
       </argument>
+    </service>
+    <service id="security.logout_listener.main" class="Symfony\Component\Security\Http\Firewall\LogoutListener" public="false">
+      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="service" id="security.logout.success_handler.main"/>
+      <argument type="collection">
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">logout</argument>
+        <argument key="logout_path">/logout</argument>
+      </argument>
+      <call method="addHandler">
+        <argument type="service" id="security.logout.handler.csrf_token_clearing"/>
+      </call>
+      <call method="addHandler">
+        <argument type="service" id="security.logout.handler.session"/>
+      </call>
+    </service>
+    <service id="security.logout.success_handler.main" class="Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler" public="false">
+      <argument type="service" id="security.http_utils"/>
+      <argument>/</argument>
+    </service>
+    <service id="security.authentication.provider.dao.main" class="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider" public="false">
+      <argument type="service" id="security.user.provider.concrete.from_database"/>
+      <argument type="service" id="security.user_checker"/>
+      <argument>main</argument>
+      <argument type="service" id="security.encoder_factory.generic"/>
+      <argument>true</argument>
+    </service>
+    <service id="security.authentication.success_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessHandler" public="false">
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="always_use_default_target_path">false</argument>
+          <argument key="default_target_path">/</argument>
+          <argument key="login_path">/login</argument>
+          <argument key="target_path_parameter">_target_path</argument>
+          <argument key="use_referer">false</argument>
+        </argument>
+      </call>
+      <call method="setProviderKey">
+        <argument>main</argument>
+      </call>
+    </service>
+    <service id="security.authentication.failure_handler.main.form_login" class="Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureHandler" public="false">
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument type="collection"/>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <call method="setOptions">
+        <argument type="collection">
+          <argument key="login_path">/login</argument>
+          <argument key="failure_path">null</argument>
+          <argument key="failure_forward">false</argument>
+          <argument key="failure_path_parameter">_failure_path</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="security.authentication.listener.form.main" class="Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener" public="false">
+      <tag name="security.remember_me_aware" id="main" provider="security.user.provider.concrete.from_database"/>
+      <argument type="service" id="security.token_storage"/>
+      <argument type="service" id="security.authentication.manager"/>
+      <argument type="service" id="security.authentication.session_strategy"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument>main</argument>
+      <argument type="service" id="security.authentication.success_handler.main.form_login"/>
+      <argument type="service" id="security.authentication.failure_handler.main.form_login"/>
+      <argument type="collection">
+        <argument key="check_path">login</argument>
+        <argument key="use_forward">false</argument>
+        <argument key="require_previous_session">false</argument>
+        <argument key="username_parameter">_username</argument>
+        <argument key="password_parameter">_password</argument>
+        <argument key="csrf_parameter">_csrf_token</argument>
+        <argument key="csrf_token_id">authenticate</argument>
+        <argument key="post_only">true</argument>
+      </argument>
+      <argument type="service" id="monolog.logger.security" on-invalid="null"/>
+      <argument type="service" id="debug.event_dispatcher" on-invalid="null"/>
+      <argument>null</argument>
+    </service>
+    <service id="security.authentication.form_entry_point.main" class="Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint" public="false">
+      <argument type="service" id="http_kernel"/>
+      <argument type="service" id="security.http_utils"/>
+      <argument>/login</argument>
+      <argument>false</argument>
     </service>
     <service id="security.authentication.listener.anonymous.main" class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
       <argument type="service" id="security.untracked_token_storage"/>
@@ -4404,23 +4653,23 @@
       <argument type="service" id="security.authentication.trust_resolver"/>
       <argument type="service" id="security.http_utils"/>
       <argument>main</argument>
-      <argument>null</argument>
+      <argument type="service" id="security.authentication.form_entry_point.main"/>
       <argument>null</argument>
       <argument>null</argument>
       <argument type="service" id="monolog.logger.security" on-invalid="null"/>
       <argument>false</argument>
     </service>
-    <service id="security.firewall.map.context.main" class="Symfony\Bundle\SecurityBundle\Security\LazyFirewallContext" public="false">
+    <service id="security.firewall.map.context.main" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext" public="false">
       <argument type="iterator">
         <argument type="service" id="security.channel_listener"/>
         <argument type="service" id="security.context_listener.0"/>
+        <argument type="service" id="security.authentication.listener.form.main"/>
         <argument type="service" id="security.authentication.listener.anonymous.main"/>
         <argument type="service" id="security.access_listener"/>
       </argument>
       <argument type="service" id="security.exception_listener.main"/>
-      <argument>null</argument>
+      <argument type="service" id="security.logout_listener.main"/>
       <argument type="service" id="security.firewall.map.config.main"/>
-      <argument type="service" id="security.untracked_token_storage"/>
     </service>
     <service id=".service_locator.iuGr.fa" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
@@ -4429,10 +4678,15 @@
         <argument key="security.firewall.map.context.main" type="service" id="security.firewall.map.context.main"/>
       </argument>
     </service>
+    <service id=".security.request_matcher.5dJADCx" class="Symfony\Component\HttpFoundation\RequestMatcher" public="false">
+      <argument>^/admin</argument>
+    </service>
     <service id="security.command.user_password_encoder" class="Symfony\Bundle\SecurityBundle\Command\UserPasswordEncoderCommand" public="false">
       <tag name="console.command" command="security:encode-password"/>
       <argument type="service" id="security.encoder_factory.generic"/>
-      <argument type="collection"/>
+      <argument type="collection">
+        <argument>App\Entity\User</argument>
+      </argument>
       <call method="setName">
         <argument>security:encode-password</argument>
       </call>
@@ -4551,6 +4805,75 @@
       <tag name="maker.command"/>
       <argument>C:\wamp64\www\AgenceImmo</argument>
     </service>
+    <service id="doctrine.fixtures_load_command" class="Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand">
+      <tag name="console.command" command="doctrine:fixtures:load"/>
+      <argument type="service" id="doctrine.fixtures.loader"/>
+      <argument type="service" id="doctrine"/>
+      <call method="setName">
+        <argument>doctrine:fixtures:load</argument>
+      </call>
+    </service>
+    <service id="doctrine.fixtures.loader" class="Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader" public="false">
+      <argument type="service" id="service_container"/>
+      <call method="addFixtures">
+        <argument type="collection">
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\AppFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\PropertyFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+          <argument type="collection">
+            <argument key="fixture" type="service" id="App\DataFixtures\UserFixtures"/>
+            <argument key="groups" type="collection"/>
+          </argument>
+        </argument>
+      </call>
+    </service>
+    <service id="knp_paginator" class="Knp\Component\Pager\Paginator" public="true" lazy="true">
+      <argument type="service" id="debug.event_dispatcher"/>
+      <argument type="service" id="request_stack"/>
+      <call method="setDefaultPaginatorOptions">
+        <argument type="collection">
+          <argument key="pageParameterName">page</argument>
+          <argument key="sortFieldParameterName">sort</argument>
+          <argument key="sortDirectionParameterName">direction</argument>
+          <argument key="filterFieldParameterName">filterField</argument>
+          <argument key="filterValueParameterName">filterValue</argument>
+          <argument key="distinct">true</argument>
+        </argument>
+      </call>
+    </service>
+    <service id="knp_paginator.subscriber.paginate" class="Knp\Component\Pager\Event\Subscriber\Paginate\PaginationSubscriber">
+      <tag name="knp_paginator.subscriber"/>
+    </service>
+    <service id="knp_paginator.subscriber.sortable" class="Knp\Component\Pager\Event\Subscriber\Sortable\SortableSubscriber">
+      <tag name="knp_paginator.subscriber"/>
+    </service>
+    <service id="knp_paginator.subscriber.filtration" class="Knp\Component\Pager\Event\Subscriber\Filtration\FiltrationSubscriber">
+      <tag name="knp_paginator.subscriber"/>
+    </service>
+    <service id="knp_paginator.subscriber.sliding_pagination" class="Knp\Bundle\PaginatorBundle\Subscriber\SlidingPaginationSubscriber">
+      <tag name="knp_paginator.subscriber"/>
+      <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest"/>
+      <tag name="container.hot_path"/>
+      <argument type="collection">
+        <argument key="defaultPaginationTemplate">@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig</argument>
+        <argument key="defaultSortableTemplate">@KnpPaginator/Pagination/sortable_link.html.twig</argument>
+        <argument key="defaultFiltrationTemplate">@KnpPaginator/Pagination/filtration.html.twig</argument>
+        <argument key="defaultPageRange">5</argument>
+      </argument>
+    </service>
+    <service id="knp_paginator.helper.processor" class="Knp\Bundle\PaginatorBundle\Helper\Processor">
+      <argument type="service" id="router.default"/>
+      <argument type="service" id="translator.data_collector"/>
+    </service>
+    <service id="knp_paginator.twig.extension.pagination" class="Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension">
+      <tag name="twig.extension"/>
+      <argument type="service" id="knp_paginator.helper.processor"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -4560,10 +4883,23 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PropertyController" class="App\Controller\PropertyController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PropertyController" class="App\Controller\PropertyController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PropertyController" class="App\Controller\PropertyController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\AppFixtures" class="App\DataFixtures\AppFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\PropertyFixtures" class="App\DataFixtures\PropertyFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\PropertyFixtures" class="App\DataFixtures\PropertyFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PropertySearchType" class="App\Form\PropertySearchType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\PropertySearchType" class="App\Form\PropertySearchType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PropertyType" class="App\Form\PropertyType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\PropertyType" class="App\Form\PropertyType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PropertyRepository" class="App\Repository\PropertyRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\PropertyRepository" class="App\Repository\PropertyRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".service_locator.CmORmuK" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -4759,13 +5095,27 @@
         <argument key="repository" type="service" id="App\Repository\PropertyRepository"/>
       </argument>
     </service>
-    <service id=".service_locator.gu3QrXD" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.CY_hMZh" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="paginator" type="service" id="knp_paginator"/>
+      </argument>
+    </service>
+    <service id=".service_locator.q6jLs_L" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="authenticationUtils" type="service" id="security.authentication_utils"/>
+      </argument>
+    </service>
+    <service id=".service_locator.fAtfP_9" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminPropertyController::delete" type="service" id=".service_locator.WCQZPh."/>
         <argument key="App\Controller\Admin\AdminPropertyController::edit" type="service" id=".service_locator.WCQZPh."/>
         <argument key="App\Controller\HomeController::index" type="service" id=".service_locator.DLYges2"/>
+        <argument key="App\Controller\PropertyController::index" type="service" id=".service_locator.CY_hMZh"/>
         <argument key="App\Controller\PropertyController::show" type="service" id=".service_locator.WCQZPh."/>
+        <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.q6jLs_L"/>
       </argument>
     </service>
     <service id=".service_locator.Y7gDuDN" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -4827,9 +5177,10 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.KO.NkYA" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.t4CDoQc" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\PropertySearchType" type="service" id="App\Form\PropertySearchType"/>
         <argument key="App\Form\PropertyType" type="service" id="App\Form\PropertyType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service" id="form.type.choice"/>
@@ -4996,10 +5347,11 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.2odPO2A" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.89ChXjf" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\PropertyRepository" type="service" id="App\Repository\PropertyRepository"/>
+        <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
       </argument>
     </service>
     <service id="debug.security.voter.security.access.authenticated_voter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">
@@ -5065,6 +5417,12 @@
     <service id=".service_locator.pNNo5z3.App\Controller\PropertyController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\PropertyController"/>
       <argument>App\Controller\PropertyController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.pNNo5z3" method="withContext"/>
+    </service>
+    <service id=".service_locator.pNNo5z3.App\Controller\SecurityController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\SecurityController"/>
+      <argument>App\Controller\SecurityController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.pNNo5z3" method="withContext"/>
     </service>
@@ -5207,12 +5565,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.gu3QrXD"/>
+      <argument type="service" id=".service_locator.fAtfP_9"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.gu3QrXD"/>
+      <argument type="service" id=".service_locator.fAtfP_9"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -5224,7 +5582,7 @@
     </service>
     <service id=".errored..service_locator.WCQZPh..App\Entity\Property" class="App\Entity\Property"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id=".service_locator.ozNWYfC"/>
+      <argument type="service" id=".service_locator.cmKf87z"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -5287,6 +5645,7 @@
         <argument key="doctrine:migrations:up-to-date">doctrine_migrations.up_to_date_command</argument>
         <argument key="doctrine:migrations:version">doctrine_migrations.version_command</argument>
         <argument key="security:encode-password">security.command.user_password_encoder</argument>
+        <argument key="doctrine:fixtures:load">doctrine.fixtures_load_command</argument>
         <argument key="make:auth">maker.auto_command.make_auth</argument>
         <argument key="make:command">maker.auto_command.make_command</argument>
         <argument key="make:controller">maker.auto_command.make_controller</argument>
@@ -5307,7 +5666,7 @@
         <argument key="make:migration">maker.auto_command.make_migration</argument>
       </argument>
     </service>
-    <service id=".service_locator.ozNWYfC" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.cmKf87z" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -5347,6 +5706,7 @@
         <argument key="doctrine.database_drop_command" type="service" id="doctrine.database_drop_command"/>
         <argument key="doctrine.database_import_command" type="service" id="doctrine.database_import_command"/>
         <argument key="doctrine.ensure_production_settings_command" type="service" id="doctrine.ensure_production_settings_command"/>
+        <argument key="doctrine.fixtures_load_command" type="service" id="doctrine.fixtures_load_command"/>
         <argument key="doctrine.mapping_convert_command" type="service" id="doctrine.mapping_convert_command"/>
         <argument key="doctrine.mapping_import_command" type="service" id="doctrine.mapping_import_command"/>
         <argument key="doctrine.mapping_info_command" type="service" id="doctrine.mapping_info_command"/>
@@ -5577,13 +5937,14 @@
     <service id="Symfony\Component\Security\Http\HttpUtils" alias="security.http_utils" public="false"/>
     <service id="Symfony\Component\Security\Guard\GuardAuthenticatorHandler" alias="security.authentication.guard_handler" public="false"/>
     <service id="security.firewall" alias="debug.security.firewall" public="false"/>
-    <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.users_in_memory"/>
+    <service id="Symfony\Component\Security\Core\User\UserProviderInterface" alias="security.user.provider.concrete.from_database"/>
     <service id="security.authentication.session_strategy.main" alias="security.authentication.session_strategy"/>
     <service id="security.user_checker.main" alias="security.user_checker" public="false"/>
     <service id="Symfony\Component\Security\Core\User\UserCheckerInterface" alias="security.user_checker" public="false"/>
+    <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.gu3QrXD"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.fAtfP_9"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

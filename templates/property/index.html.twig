@@ -1,14 +1,35 @@
 {% extends "base.html.twig" %}
 
 {% block title "Les biens" %}
-{% endblock %}
 
 {% block body %}
-
-<div class="jumbotron text-center">
+<div class="jumbotron">
+    <div class="container">
+        {{ form_start(form) }}
+            <div class="form-row align-items-end">
+                <div class="col">
+                    {{ form_row(form.minSurface) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+            </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+<div class="text-center">
     <div class="container">
         <h1>Les biens</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam sed debitis dolor ducimus fugiat blanditiis facere quidem sapiente harum atque praesentium quasi, quibusdam, ipsa officia. Ratione nemo possimus facere.</p>
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    {% include 'property/_property.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="pagination">
+        {{ knp_pagination_render(properties) }}
     </div>
 </div>
     

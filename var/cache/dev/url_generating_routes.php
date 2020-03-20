@@ -21,5 +21,7 @@ return [
     'admin.property.delete' => [['id'], ['_controller' => 'App\\Controller\\Admin\\AdminPropertyController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/property/delete']], [], []],
     'property.index' => [[], ['_controller' => 'App\\Controller\\PropertyController::index'], [], [['text', '/biens']], [], []],
     'property.show' => [['id'], ['_controller' => 'App\\Controller\\PropertyController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/biens']], [], []],
+    'login' => [[], ['_controller' => 'App\\Controller\\SecurityController::login'], [], [['text', '/login']], [], []],
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], []],
+    'logout' => [[], [], [], [['text', '/logout']], [], []],
 ];
