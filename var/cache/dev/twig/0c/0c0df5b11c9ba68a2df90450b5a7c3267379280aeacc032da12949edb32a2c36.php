@@ -106,12 +106,18 @@ class __TwigTemplate_28a51f41b31d1a4cac0a647e5044607c876d5856b1d3cf7f70716521005
                     </div>
                     <div class=\"col\">
                         ";
-        // line 18
+        // line 17
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 17, $this->source); })()), "options", [], "any", false, false, false, 17), 'row');
+        echo "
+                    </div>
+                    <div class=\"col\">
+                        ";
+        // line 21
         echo "                    </div>
                 </div>
             ";
-        // line 20
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 20, $this->source); })()), 'form_end');
+        // line 23
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 23, $this->source); })()), 'form_end');
         echo "
         </div>
     </div>
@@ -121,9 +127,9 @@ class __TwigTemplate_28a51f41b31d1a4cac0a647e5044607c876d5856b1d3cf7f70716521005
 
         <div class=\"row\">
             ";
-        // line 28
+        // line 31
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["properties"]) || array_key_exists("properties", $context) ? $context["properties"] : (function () { throw new RuntimeError('Variable "properties" does not exist.', 28, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["properties"]) || array_key_exists("properties", $context) ? $context["properties"] : (function () { throw new RuntimeError('Variable "properties" does not exist.', 31, $this->source); })()));
         $context['loop'] = [
           'parent' => $context['_parent'],
           'index0' => 0,
@@ -138,12 +144,12 @@ class __TwigTemplate_28a51f41b31d1a4cac0a647e5044607c876d5856b1d3cf7f70716521005
             $context['loop']['last'] = 1 === $length;
         }
         foreach ($context['_seq'] as $context["_key"] => $context["property"]) {
-            // line 29
+            // line 32
             echo "                <div class=\"col-md-4\">
                     ";
-            // line 30
-            $this->loadTemplate("property/_property.html.twig", "property/index.html.twig", 30)->display($context);
-            // line 31
+            // line 33
+            $this->loadTemplate("property/_property.html.twig", "property/index.html.twig", 33)->display($context);
+            // line 34
             echo "                </div>
             ";
             ++$context['loop']['index0'];
@@ -158,12 +164,12 @@ class __TwigTemplate_28a51f41b31d1a4cac0a647e5044607c876d5856b1d3cf7f70716521005
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['property'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 33
+        // line 36
         echo "        </div>    
         <div class=\"pagination\">
             ";
-        // line 35
-        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["properties"]) || array_key_exists("properties", $context) ? $context["properties"] : (function () { throw new RuntimeError('Variable "properties" does not exist.', 35, $this->source); })()));
+        // line 38
+        echo $this->extensions['Knp\Bundle\PaginatorBundle\Twig\Extension\PaginationExtension']->render($this->env, (isset($context["properties"]) || array_key_exists("properties", $context) ? $context["properties"] : (function () { throw new RuntimeError('Variable "properties" does not exist.', 38, $this->source); })()));
         echo "
         </div>  
     </div>
@@ -188,7 +194,7 @@ class __TwigTemplate_28a51f41b31d1a4cac0a647e5044607c876d5856b1d3cf7f70716521005
 
     public function getDebugInfo()
     {
-        return array (  166 => 35,  162 => 33,  147 => 31,  145 => 30,  142 => 29,  125 => 28,  114 => 20,  110 => 18,  104 => 14,  98 => 11,  92 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  172 => 38,  168 => 36,  153 => 34,  151 => 33,  148 => 32,  131 => 31,  120 => 23,  116 => 21,  110 => 17,  104 => 14,  98 => 11,  92 => 8,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -207,6 +213,9 @@ class __TwigTemplate_28a51f41b31d1a4cac0a647e5044607c876d5856b1d3cf7f70716521005
                     </div>
                     <div class=\"col\">
                         {{ form_row(form.maxPrice) }}
+                    </div>
+                    <div class=\"col\">
+                        {{ form_row(form.options) }}
                     </div>
                     <div class=\"col\">
                         {# <div class=\"btn btn-primary\">Rechercher</div> #}

@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminOptionController extends AbstractController
 {
     /**
-     * @Route("/", name="option_index", methods={"GET"})
+     * @Route("/", name="admin.option.index", methods={"GET"})
      */
     public function index(OptionRepository $optionRepository): Response
     {
@@ -26,7 +26,7 @@ class AdminOptionController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="option_new", methods={"GET","POST"})
+     * @Route("/new", name="admin.option.new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -39,7 +39,7 @@ class AdminOptionController extends AbstractController
             $entityManager->persist($option);
             $entityManager->flush();
 
-            return $this->redirectToRoute('option_index');
+            return $this->redirectToRoute('admin/option.index');
         }
 
         return $this->render('admin/option/new.html.twig', [
@@ -49,7 +49,7 @@ class AdminOptionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="option_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="admin.option.edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Option $option): Response
     {
@@ -59,7 +59,8 @@ class AdminOptionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('option_index');
+            return $this->redirectToRoute('admin.option.edit', ['id' => $option->getId()]);
+
         }
 
         return $this->render('admin/option/edit.html.twig', [
@@ -69,7 +70,7 @@ class AdminOptionController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="option_delete", methods={"DELETE"})
+     * @Route("/{id}", name="admin.option.delete", methods={"DELETE"})
      */
     public function delete(Request $request, Option $option): Response
     {
@@ -79,6 +80,6 @@ class AdminOptionController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('option_index');
+        return $this->redirectToRoute('admin.option.index');
     }
 }

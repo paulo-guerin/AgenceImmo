@@ -1,35 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Option index{% endblock %}
+{% block title 'Gérer les options' %}
 
 {% block body %}
-    <h1>Option index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for option in options %}
-            <tr>
-                <td>{{ option.id }}</td>
-                <td>{{ option.name }}</td>
-                <td>
-                    <a href="{{ path('option_show', {'id': option.id}) }}">show</a>
-                    <a href="{{ path('option_edit', {'id': option.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
+    <div class="container mt-4">
+        <h1>Gérer les options</h1>
+
+        {% for message in app.flashes ('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>           
         {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('option_new') }}">Create new</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for option in options %}               
+                    <tr>
+                        <td>{{ option.name }}</td>
+                        <td>
+                            <a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
+                            <a href="{{ path('admin.option.delete', {id: option.id, _token: csrf_token ( 'delete' ~ option.id )}) }}" class="btn btn-danger">Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="text-right">
+        <a href="{{ path('admin.option.new') }}" class="btn btn-primary">Créer un nouveau bien</a>
+        </div>
+
+
+    </div>
+    
 {% endblock %}
+
