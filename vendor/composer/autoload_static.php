@@ -32,6 +32,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         array (
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'Vich\\UploaderBundle\\' => 20,
+        ),
         'T' => 
         array (
             'Twig\\Extra\\TwigExtraBundle\\' => 27,
@@ -117,6 +121,7 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Metadata\\' => 9,
         ),
         'K' => 
         array (
@@ -179,6 +184,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Vich\\UploaderBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vich/uploader-bundle/src',
         ),
         'Twig\\Extra\\TwigExtraBundle\\' => 
         array (
@@ -475,6 +484,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Metadata\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jms/metadata/src',
         ),
         'Knp\\Component\\' => 
         array (
