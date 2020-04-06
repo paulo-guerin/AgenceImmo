@@ -3,21 +3,20 @@
 {% block title property.title %}
     
 {% block body %}
-
     <div class="jumbotron">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
                     {% if property.filename %}
-                        <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height: auto;">  
+                        <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="" class="card-img-top">  
                     {% else %}
-                        <img src="{{ '/images/properties/800x530.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height: auto;">
+                        <img src="{{ '/images/properties/800x530.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top">
                     {% endif %}
                 </div>
                 <div class="col-md-4">
-                    <h1>{{ property.title }}</h1>
+                    <h1 class="coco">{{ property.title }}</h1>
                     <h2>{{ property.rooms }} pièces - {{ property.surface }} m²</h2>
-                    <div class="text-primary">{{ property.formatedPrice }} €</div>
+                    <div class="propertyPrice">{{ property.formatedPrice }} €</div>
                     <a href="#" class="btn btn-primary">Contacter l'agence</a>                   
                 </div>
             </div>
@@ -51,15 +50,18 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4">                          
                 <h2>Spécificités</h2>
-                <div class="ul list-group">
-                    {% for option in property.options %}
-                        <div class="li list-group-item">{{ option.name }}</div>                   
-                    {% endfor %}
-                </div>
+                <ul class="list-group">
+                    {% if property.options is empty %}
+                        <p>Aucunes spécificités</p>
+                    {% else %}
+                        {% for option in property.options %}                                                 
+                            <li class="list-group-item">{{ option.name }}</li>                                               
+                        {% endfor %}
+                    {% endif %}                    
+                </ul>
             </div>
         </div>
-    </div>
-    
+    </div>   
 {% endblock %}
