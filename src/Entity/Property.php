@@ -8,11 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File;
 use Symfony\Component\HttpFoundation\File\File as FileFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Validator\Constraints\File as ConstraintsFile;
-use Vich\UploaderBundle\Entity\File as EntityFile;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
@@ -41,7 +38,10 @@ class Property
     private $filename;
 
     /**
-     * @var File|null
+     * @var FileFile
+     * @Assert\Image(
+     *  mimeTypes="image/jpeg"
+     * )
      * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
      */
     private $imageFile;
@@ -345,13 +345,19 @@ class Property
         return $this;
     }
     
-    public function getImageFile(): ?string
+    /**
+     * @return null|FileFile
+     */
+    public function getImageFile(): ?FileFile
     {
         return $this->imageFile;
     }
 
-    
-    public function setImageFile(?string $imageFile): Property
+    /**
+     * @param null|FileFile $imageFile
+     * @return Property
+     */
+    public function setImageFile(?FileFile $imageFile): Property
     {
         $this->imageFile = $imageFile;
         if ($this->imageFile instanceof UploadedFile) {

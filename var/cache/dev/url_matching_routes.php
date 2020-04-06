@@ -50,6 +50,10 @@ return [
                     .')'
                 .')'
                 .'|/biens/([^/]++)(*:290)'
+                .'|/media/cache/resolve/(?'
+                    .'|([A-z0-9_-]*)/rc/([^/]++)/(.+)(*:352)'
+                    .'|([A-z0-9_-]*)/(.+)(*:378)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -64,8 +68,10 @@ return [
         210 => [[['_route' => 'admin.option.delete', '_controller' => 'App\\Controller\\Admin\\AdminOptionController::delete'], ['id'], ['DELETE' => 0], null, false, true, null]],
         243 => [[['_route' => 'admin.property.edit', '_controller' => 'App\\Controller\\Admin\\AdminPropertyController::edit'], ['id'], null, null, false, true, null]],
         265 => [[['_route' => 'admin.property.delete', '_controller' => 'App\\Controller\\Admin\\AdminPropertyController::delete'], ['id'], null, null, false, true, null]],
-        290 => [
-            [['_route' => 'property.show', '_controller' => 'App\\Controller\\PropertyController::show'], ['id'], null, null, false, true, null],
+        290 => [[['_route' => 'property.show', '_controller' => 'App\\Controller\\PropertyController::show'], ['id'], null, null, false, true, null]],
+        352 => [[['_route' => 'liip_imagine_filter_runtime', '_controller' => 'Liip\\ImagineBundle\\Controller\\ImagineController::filterRuntimeAction'], ['filter', 'hash', 'path'], ['GET' => 0], null, false, true, null]],
+        378 => [
+            [['_route' => 'liip_imagine_filter', '_controller' => 'Liip\\ImagineBundle\\Controller\\ImagineController::filterAction'], ['filter', 'path'], ['GET' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

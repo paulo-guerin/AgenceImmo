@@ -60,6 +60,7 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
             'Symfony\\Component\\VarDumper\\' => 28,
             'Symfony\\Component\\Validator\\' => 28,
             'Symfony\\Component\\Translation\\' => 30,
+            'Symfony\\Component\\Templating\\' => 29,
             'Symfony\\Component\\String\\' => 25,
             'Symfony\\Component\\Stopwatch\\' => 28,
             'Symfony\\Component\\Serializer\\' => 29,
@@ -123,10 +124,18 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
             'Monolog\\' => 8,
             'Metadata\\' => 9,
         ),
+        'L' => 
+        array (
+            'Liip\\ImagineBundle\\' => 19,
+        ),
         'K' => 
         array (
             'Knp\\Component\\' => 14,
             'Knp\\Bundle\\PaginatorBundle\\' => 27,
+        ),
+        'I' => 
+        array (
+            'Imagine\\' => 8,
         ),
         'F' => 
         array (
@@ -264,6 +273,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
+        ),
+        'Symfony\\Component\\Templating\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/templating',
         ),
         'Symfony\\Component\\String\\' => 
         array (
@@ -489,6 +502,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         array (
             0 => __DIR__ . '/..' . '/jms/metadata/src',
         ),
+        'Liip\\ImagineBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liip/imagine-bundle',
+        ),
         'Knp\\Component\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-components/src/Knp/Component',
@@ -496,6 +513,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'Knp\\Bundle\\PaginatorBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle/src',
+        ),
+        'Imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagine/imagine/src',
         ),
         'Faker\\' => 
         array (
