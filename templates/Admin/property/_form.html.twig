@@ -1,21 +1,41 @@
   {{ form_start(form) }}
     <div class="row">
-        <div class="col-md-4">{{ form_row(form.title) }}</div>
-        <div class="col-md-4">{{ form_row(form.surface) }}</div>
-        <div class="col-md-4">{{ form_row(form.price) }}</div>
+        <div class="col-md-8">
+            <div class="col-md-2">{{ form_row(form.sold) }}</div>
+            <div class="row">
+                <div class="col-md-4">{{ form_row(form.title) }}</div>
+                <div class="col-md-2">{{ form_row(form.surface) }}</div>
+                <div class="col-md-2">{{ form_row(form.price) }}</div>       
+            </div>
+        </div>
+        <div class="col-md-4">            
+            <div class="row flex">
+                {% for picture in property.pictures %}
+                    <div class="col" style="width: 100px; flex: none; margin: 5px">
+                        <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}" alt="" width="100">
+                        <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger" data-delete data-token="{{ csrf_token ( 'delete' ~ picture.id ) }}">Supprimer</a>
+                    </div>                
+                {% endfor %}
+            </div>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-2">{{ form_row(form.rooms) }}</div>
         <div class="col-md-2">{{ form_row(form.bedrooms) }}</div>
-        <div class="col-md-2">{{ form_row(form.heat) }}</div>
         <div class="col-md-2">{{ form_row(form.floor) }}</div>
+        <div class="col-md-2">{{ form_row(form.heat) }}</div>
     </div>
-    <div class="row">
-        <div class="col-md-2">{{ form_row(form.imageFile) }}</div>
-        <div class="col-md-3">{{ form_row(form.address) }}</div>
-        <div class="col-md-2">{{ form_row(form.city) }}</div>
-        <div class="col-md-1">{{ form_row(form.postalCode) }}</div>
-        <div class="col-md-2">{{ form_row(form.sold) }}</div>
+    <div class="row">       
+        <div class="col-md-5">{{ form_row(form.address) }}</div>
+        <div class="col-md-3">{{ form_row(form.city) }}</div>
+        <div class="col-md-2">{{ form_row(form.postalCode) }}</div>
+        <div class="col-md-2">{{ form_row(form.pictureFiles) }}
+            {# {% if property.filename %}
+                <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height: auto;">  
+            {% else %}
+                <img src="{{ '/images/properties/360x230.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height: auto;">
+            {% endif %} #}
+        </div>
     </div>
     {{ form_rest(form) }}
         <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>

@@ -1,29 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block title property.title %}
-    
+
 {% block body %}
     <div class="jumbotron">
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    {% if property.filename %}
-                        <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('medium') }}" alt="" class="card-img-top">  
+                    {% if property.pictures is empty %}
+                        <img src="{{ '/media/properties/360x230.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
                     {% else %}
-                        <img src="{{ '/images/properties/800x530.jpg' | imagine_filter('medium') }}" alt="" class="card-img-top">
+                        {% for picture in property.pictures %}
+                            <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                        {% endfor %}
                     {% endif %}
                 </div>
                 <div class="col-md-4">
-                    <h1 class="coco">{{ property.title }}</h1>
+                    <h1>{{ property.title }}</h1>
                     <h2>{{ property.rooms }} pièces - {{ property.surface }} m²</h2>
                     <div class="propertyPrice">{{ property.formatedPrice }} €</div>
-                    <a href="#" class="btn btn-primary">Contacter l'agence</a>                   
+                    <p class="mt-2">{{ property.description | nl2br }}</p>
+                    <a href="{{ path('contact') }}" class="btn btn-primary mt-2">Contacter l'agence</a>   
                 </div>
             </div>
         </div>
     </div>
     <div class="container mt-4">
-        <p>{{ property.description | nl2br }}</p>
         <div class="row">
             <div class="col-md-8">
                 <h2>Caractéristiques</h2>
@@ -65,3 +67,4 @@
         </div>
     </div>   
 {% endblock %}
+

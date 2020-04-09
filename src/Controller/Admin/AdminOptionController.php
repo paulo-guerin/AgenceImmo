@@ -79,7 +79,6 @@ class AdminOptionController extends AbstractController
             $entityManager->remove($option);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('admin.option.index');
     }
 }

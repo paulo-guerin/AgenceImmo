@@ -22,6 +22,7 @@
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
       <parameter key="LiipImagineBundle">Liip\ImagineBundle\LiipImagineBundle</parameter>
+      <parameter key="SwiftmailerBundle">Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle</parameter>
     </parameter>
     <parameter key="kernel.bundles_metadata" type="collection">
       <parameter key="FrameworkBundle" type="collection">
@@ -83,6 +84,10 @@
       <parameter key="LiipImagineBundle" type="collection">
         <parameter key="path">/Applications/MAMP/htdocs/AgenceImmo/vendor/liip/imagine-bundle</parameter>
         <parameter key="namespace">Liip\ImagineBundle</parameter>
+      </parameter>
+      <parameter key="SwiftmailerBundle" type="collection">
+        <parameter key="path">/Applications/MAMP/htdocs/AgenceImmo/vendor/symfony/swiftmailer-bundle</parameter>
+        <parameter key="namespace">Symfony\Bundle\SwiftmailerBundle</parameter>
       </parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
@@ -247,8 +252,8 @@
     <parameter key="vich_uploader.default_filename_attribute_suffix">_name</parameter>
     <parameter key="vich_uploader.mappings" type="collection">
       <parameter key="property_image" type="collection">
-        <parameter key="uri_prefix">images/properties</parameter>
-        <parameter key="upload_destination">/Applications/MAMP/htdocs/AgenceImmo/public/images/properties</parameter>
+        <parameter key="uri_prefix">/media/properties</parameter>
+        <parameter key="upload_destination">/Applications/MAMP/htdocs/AgenceImmo/public/media/properties</parameter>
         <parameter key="namer" type="collection">
           <parameter key="service">Vich\UploaderBundle\Naming\UniqidNamer.property_image</parameter>
           <parameter key="options" type="collection"/>
@@ -349,6 +354,19 @@
     <parameter key="liip_imagine.binary.loader.default">default</parameter>
     <parameter key="liip_imagine.controller.filter_action">Liip\ImagineBundle\Controller\ImagineController::filterAction</parameter>
     <parameter key="liip_imagine.controller.filter_runtime_action">Liip\ImagineBundle\Controller\ImagineController::filterRuntimeAction</parameter>
+    <parameter key="swiftmailer.mailer.default.transport.name">dynamic</parameter>
+    <parameter key="swiftmailer.spool.default.memory.path">/Applications/MAMP/htdocs/AgenceImmo/var/cache/dev/swiftmailer/spool/default</parameter>
+    <parameter key="swiftmailer.mailer.default.spool.enabled">true</parameter>
+    <parameter key="swiftmailer.mailer.default.plugin.impersonate">null</parameter>
+    <parameter key="swiftmailer.mailer.default.single_address">null</parameter>
+    <parameter key="swiftmailer.mailer.default.delivery.enabled">true</parameter>
+    <parameter key="swiftmailer.spool.enabled">true</parameter>
+    <parameter key="swiftmailer.delivery.enabled">true</parameter>
+    <parameter key="swiftmailer.single_address">null</parameter>
+    <parameter key="swiftmailer.mailers" type="collection">
+      <parameter key="default">swiftmailer.mailer.default</parameter>
+    </parameter>
+    <parameter key="swiftmailer.default_mailer">default</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.request" type="collection">
         <parameter>request</parameter>
@@ -414,6 +432,10 @@
         <parameter>db</parameter>
         <parameter>@Doctrine/Collector/db.html.twig</parameter>
       </parameter>
+      <parameter key="swiftmailer.data_collector" type="collection">
+        <parameter>swiftmailer</parameter>
+        <parameter>@Swiftmailer/Collector/swiftmailer.html.twig</parameter>
+      </parameter>
       <parameter key="data_collector.dump" type="collection">
         <parameter>dump</parameter>
         <parameter>@Debug/Profiler/dump.html.twig</parameter>
@@ -448,6 +470,13 @@
         <argument type="service" id=".service_locator.pNNo5z3.App\Controller\Admin\AdminOptionController"/>
       </call>
     </service>
+    <service id="App\Controller\Admin\AdminPictureController" class="App\Controller\Admin\AdminPictureController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.pNNo5z3.App\Controller\Admin\AdminPictureController"/>
+      </call>
+    </service>
     <service id="App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -455,6 +484,13 @@
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
       <call method="setContainer">
         <argument type="service" id=".service_locator.pNNo5z3.App\Controller\Admin\AdminPropertyController"/>
+      </call>
+    </service>
+    <service id="App\Controller\ContactController" class="App\Controller\ContactController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.pNNo5z3.App\Controller\ContactController"/>
       </call>
     </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
@@ -490,6 +526,9 @@
       <tag name="doctrine.fixture.orm"/>
       <argument type="service" id="security.user_password_encoder.generic"/>
     </service>
+    <service id="App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\OptionType" class="App\Form\OptionType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
@@ -505,6 +544,10 @@
       <argument type="service" id="Vich\UploaderBundle\Templating\Helper\UploaderHelper"/>
     </service>
     <service id="App\Repository\OptionRepository" class="App\Repository\OptionRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\PictureRepository" class="App\Repository\PictureRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -615,6 +658,7 @@
         <argument key="form.type.entity" type="service" id="form.type.entity" on-invalid="ignore_uninitialized"/>
         <argument key="security.token_storage" type="service" id="security.token_storage" on-invalid="ignore_uninitialized"/>
         <argument key="cache.security_expression_language" type="service" id="cache.security_expression_language" on-invalid="ignore_uninitialized"/>
+        <argument key="swiftmailer.email_sender.listener" type="service" id="swiftmailer.email_sender.listener" on-invalid="ignore_uninitialized"/>
       </argument>
       <argument type="collection">
         <argument key="cache.app" type="collection">
@@ -667,6 +711,9 @@
           <argument>setToken</argument>
         </argument>
         <argument key="cache.security_expression_language" type="collection">
+          <argument>reset</argument>
+        </argument>
+        <argument key="swiftmailer.email_sender.listener" type="collection">
           <argument>reset</argument>
         </argument>
       </argument>
@@ -918,6 +965,7 @@
         <argument>Liip\ImagineBundle\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\ContactType</argument>
         <argument>App\Form\OptionType</argument>
         <argument>App\Form\PropertySearchType</argument>
         <argument>App\Form\PropertyType</argument>
@@ -1245,7 +1293,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.ofxohYI"/>
+      <argument type="service" id=".service_locator.g8hlY6p"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -1939,6 +1987,7 @@
           <argument>/Applications/MAMP/htdocs/AgenceImmo/vendor/symfony/maker-bundle/src/translations</argument>
           <argument>/Applications/MAMP/htdocs/AgenceImmo/vendor/doctrine/doctrine-fixtures-bundle/translations</argument>
           <argument>/Applications/MAMP/htdocs/AgenceImmo/vendor/liip/imagine-bundle/translations</argument>
+          <argument>/Applications/MAMP/htdocs/AgenceImmo/vendor/symfony/swiftmailer-bundle/translations</argument>
         </argument>
         <argument key="cache_vary" type="collection">
           <argument key="scanned_directories" type="collection">
@@ -1961,6 +2010,7 @@
             <argument>vendor/symfony/maker-bundle/src/translations</argument>
             <argument>vendor/doctrine/doctrine-fixtures-bundle/translations</argument>
             <argument>vendor/liip/imagine-bundle/translations</argument>
+            <argument>vendor/symfony/swiftmailer-bundle/translations</argument>
           </argument>
         </argument>
       </argument>
@@ -2219,6 +2269,9 @@
       </call>
       <call method="add">
         <argument type="service" id="data_collector.doctrine"/>
+      </call>
+      <call method="add">
+        <argument type="service" id="swiftmailer.data_collector"/>
       </call>
       <call method="add">
         <argument type="service" id="data_collector.dump"/>
@@ -2822,6 +2875,38 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
+        <argument>kernel.exception</argument>
+        <argument type="collection">
+          <argument type="service" id="swiftmailer.email_sender.listener"/>
+          <argument>onException</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>kernel.terminate</argument>
+        <argument type="collection">
+          <argument type="service" id="swiftmailer.email_sender.listener"/>
+          <argument>onTerminate</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.error</argument>
+        <argument type="collection">
+          <argument type="service" id="swiftmailer.email_sender.listener"/>
+          <argument>onException</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
+        <argument>console.terminate</argument>
+        <argument type="collection">
+          <argument type="service" id="swiftmailer.email_sender.listener"/>
+          <argument>onTerminate</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
+      <call method="addListener">
         <argument>knp_pager.before</argument>
         <argument type="collection">
           <argument type="service" id="knp_paginator.subscriber.paginate"/>
@@ -3414,6 +3499,14 @@
         <argument>!LiipImagine</argument>
       </call>
       <call method="addPath">
+        <argument>/Applications/MAMP/htdocs/AgenceImmo/vendor/symfony/swiftmailer-bundle/Resources/views</argument>
+        <argument>Swiftmailer</argument>
+      </call>
+      <call method="addPath">
+        <argument>/Applications/MAMP/htdocs/AgenceImmo/vendor/symfony/swiftmailer-bundle/Resources/views</argument>
+        <argument>!Swiftmailer</argument>
+      </call>
+      <call method="addPath">
         <argument>/Applications/MAMP/htdocs/AgenceImmo/templates</argument>
       </call>
       <call method="addPath">
@@ -3968,7 +4061,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.epFE5c7"/>
+      <argument type="service" id=".service_locator.elJ8Ueb"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5755,12 +5848,114 @@
       <argument type="service" id="liip_imagine.cache.manager"/>
       <deprecated>The "%service_id%" service is deprecated since LiipImagineBundle 2.2 and will be removed in 3.0.</deprecated>
     </service>
+    <service id=".4_Swift_Transport_Esmtp_Auth_NTLMAuthenticator~QnDm7Ci" class="Swift_Transport_Esmtp_Auth_NTLMAuthenticator" public="false"/>
+    <service id=".3_Swift_Transport_Esmtp_Auth_PlainAuthenticator~QnDm7Ci" class="Swift_Transport_Esmtp_Auth_PlainAuthenticator" public="false"/>
+    <service id=".2_Swift_Transport_Esmtp_Auth_LoginAuthenticator~QnDm7Ci" class="Swift_Transport_Esmtp_Auth_LoginAuthenticator" public="false"/>
+    <service id=".1_Swift_Transport_Esmtp_Auth_CramMd5Authenticator~QnDm7Ci" class="Swift_Transport_Esmtp_Auth_CramMd5Authenticator" public="false"/>
+    <service id="swiftmailer.mailer.abstract" class="Swift_Mailer" public="true" abstract="true">
+      <argument type="service" id="swiftmailer.mailer.default.transport.spool"/>
+    </service>
+    <service id="swiftmailer.transport.smtp.configurator.abstract" class="Symfony\Bundle\SwiftmailerBundle\DependencyInjection\SmtpTransportConfigurator" public="false" abstract="true"/>
+    <service id="swiftmailer.transport.sendmail.abstract" class="Swift_Transport_SendmailTransport" public="false" abstract="true"/>
+    <service id="swiftmailer.transport.null.abstract" class="Swift_Transport_NullTransport" public="false" abstract="true"/>
+    <service id="swiftmailer.transport.failover" class="Swift_Transport_FailoverTransport" public="false"/>
+    <service id="swiftmailer.transport.buffer.abstract" class="Swift_Transport_StreamBuffer" public="false" abstract="true">
+      <argument type="service" id="swiftmailer.transport.replacementfactory"/>
+    </service>
+    <service id="swiftmailer.transport.authhandler.abstract" class="Swift_Transport_Esmtp_AuthHandler" public="false" abstract="true">
+      <argument type="collection">
+        <argument type="service" id=".1_Swift_Transport_Esmtp_Auth_CramMd5Authenticator~QnDm7Ci"/>
+        <argument type="service" id=".2_Swift_Transport_Esmtp_Auth_LoginAuthenticator~QnDm7Ci"/>
+        <argument type="service" id=".3_Swift_Transport_Esmtp_Auth_PlainAuthenticator~QnDm7Ci"/>
+        <argument type="service" id=".4_Swift_Transport_Esmtp_Auth_NTLMAuthenticator~QnDm7Ci"/>
+      </argument>
+    </service>
+    <service id="swiftmailer.transport.eventdispatcher.abstract" class="Swift_Events_SimpleEventDispatcher" public="false" abstract="true"/>
+    <service id="swiftmailer.transport.replacementfactory" class="Swift_StreamFilters_StringReplacementFilterFactory" public="false"/>
+    <service id="swiftmailer.plugin.redirecting.abstract" class="Swift_Plugins_RedirectingPlugin" public="false" abstract="true"/>
+    <service id="swiftmailer.plugin.antiflood.abstract" class="Swift_Plugins_AntiFloodPlugin" public="false" abstract="true"/>
+    <service id="swiftmailer.plugin.impersonate.abstract" class="Swift_Plugins_ImpersonatePlugin" public="false" abstract="true"/>
+    <service id="swiftmailer.plugin.messagelogger.abstract" class="Swift_Plugins_MessageLogger" abstract="true"/>
+    <service id="swiftmailer.transport.smtp.abstract" class="Swift_Transport_EsmtpTransport" public="false" abstract="true"/>
+    <service id="swiftmailer.transport.spool.abstract" class="Swift_Transport_SpoolTransport" public="false" abstract="true"/>
+    <service id="swiftmailer.spool.file.abstract" class="Swift_FileSpool" public="false" abstract="true">
+      <argument></argument>
+    </service>
+    <service id="swiftmailer.spool.memory.abstract" class="Swift_MemorySpool" public="false" abstract="true"/>
+    <service id="swiftmailer.email_sender.listener" class="Symfony\Bundle\SwiftmailerBundle\EventListener\EmailSenderListener">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="kernel.reset" method="reset"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="monolog.logger" on-invalid="null"/>
+    </service>
+    <service id="swiftmailer.data_collector" class="Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector" public="false">
+      <tag name="data_collector" template="@Swiftmailer/Collector/swiftmailer.html.twig" id="swiftmailer" priority="245"/>
+      <argument type="service" id="service_container"/>
+    </service>
+    <service id="swiftmailer.command.debug" class="Symfony\Bundle\SwiftmailerBundle\Command\DebugCommand">
+      <tag name="console.command" command="debug:swiftmailer"/>
+      <call method="setName">
+        <argument>debug:swiftmailer</argument>
+      </call>
+    </service>
+    <service id="swiftmailer.command.new_email" class="Symfony\Bundle\SwiftmailerBundle\Command\NewEmailCommand">
+      <tag name="console.command" command="swiftmailer:email:send"/>
+      <call method="setName">
+        <argument>swiftmailer:email:send</argument>
+      </call>
+    </service>
+    <service id="swiftmailer.command.send_email" class="Symfony\Bundle\SwiftmailerBundle\Command\SendEmailCommand">
+      <tag name="console.command" command="swiftmailer:spool:send"/>
+      <call method="setName">
+        <argument>swiftmailer:spool:send</argument>
+      </call>
+    </service>
+    <service id="swiftmailer.mailer.default.transport.eventdispatcher" class="Swift_Events_SimpleEventDispatcher" public="false"/>
+    <service id="swiftmailer.mailer.default.transport.dynamic" class="Swift_Transport">
+      <argument type="collection">
+        <argument key="transport">smtp</argument>
+        <argument key="url">%env(MAILER_URL)%</argument>
+        <argument key="username">null</argument>
+        <argument key="password">null</argument>
+        <argument key="host">localhost</argument>
+        <argument key="port">null</argument>
+        <argument key="timeout">30</argument>
+        <argument key="source_ip">null</argument>
+        <argument key="local_domain">null</argument>
+        <argument key="encryption">null</argument>
+        <argument key="auth_mode">null</argument>
+        <argument key="command">/usr/sbin/sendmail -bs</argument>
+      </argument>
+      <argument type="service" id="router.request_context" on-invalid="null"/>
+      <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
+      <factory class="Symfony\Bundle\SwiftmailerBundle\DependencyInjection\SwiftmailerTransportFactory" method="createTransport"/>
+    </service>
+    <service id="swiftmailer.mailer.default" class="Swift_Mailer" public="true">
+      <argument type="service" id="swiftmailer.mailer.default.transport.spool"/>
+    </service>
+    <service id="swiftmailer.mailer.default.spool.memory" class="Swift_MemorySpool" public="false"/>
+    <service id="swiftmailer.mailer.default.transport.spool" class="Swift_Transport_SpoolTransport" public="false">
+      <argument type="service" id="swiftmailer.mailer.default.transport.eventdispatcher"/>
+      <argument type="service" id="swiftmailer.mailer.default.spool.memory"/>
+      <call method="registerPlugin">
+        <argument type="service" id="swiftmailer.mailer.default.plugin.messagelogger"/>
+      </call>
+    </service>
+    <service id="swiftmailer.mailer.default.plugin.messagelogger" class="Swift_Plugins_MessageLogger" public="true">
+      <tag name="swiftmailer.default.plugin"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminOptionController" class="App\Controller\Admin\AdminOptionController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminOptionController" class="App\Controller\Admin\AdminOptionController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\AdminOptionController" class="App\Controller\Admin\AdminOptionController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminPictureController" class="App\Controller\Admin\AdminPictureController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminPictureController" class="App\Controller\Admin\AdminPictureController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\Admin\AdminPictureController" class="App\Controller\Admin\AdminPictureController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\AdminPropertyController" class="App\Controller\Admin\AdminPropertyController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ContactController" class="App\Controller\ContactController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -5776,6 +5971,8 @@
     <service id=".abstract.instanceof.App\DataFixtures\PropertyFixture" class="App\DataFixtures\PropertyFixture" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\FixturesBundle\ORMFixtureInterface.0.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\DataFixtures\UserFixtures" class="App\DataFixtures\UserFixtures" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ContactType" class="App\Form\ContactType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ContactType" class="App\Form\ContactType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\OptionType" class="App\Form\OptionType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\OptionType" class="App\Form\OptionType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\PropertySearchType" class="App\Form\PropertySearchType" autowire="true" abstract="true"/>
@@ -5784,6 +5981,8 @@
     <service id=".abstract.instanceof.App\Form\PropertyType" class="App\Form\PropertyType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\OptionRepository" class="App\Repository\OptionRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\OptionRepository" class="App\Repository\OptionRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PictureRepository" class="App\Repository\PictureRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\PictureRepository" class="App\Repository\PictureRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PropertyRepository" class="App\Repository\PropertyRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\PropertyRepository" class="App\Repository\PropertyRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
@@ -5983,10 +6182,22 @@
         <argument key="option" type="service" id=".errored..service_locator.YGrP2Nl.App\Entity\Option"/>
       </argument>
     </service>
+    <service id=".service_locator.4YbvVID" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="picture" type="service" id=".errored..service_locator.4YbvVID.App\Entity\Picture"/>
+      </argument>
+    </service>
     <service id=".service_locator.WCQZPh." class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="property" type="service" id=".errored..service_locator.WCQZPh..App\Entity\Property"/>
+      </argument>
+    </service>
+    <service id=".service_locator.5sWVEo_" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="mailer" type="service" id="swiftmailer.mailer.default"/>
       </argument>
     </service>
     <service id=".service_locator.DLYges2" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
@@ -6007,14 +6218,16 @@
         <argument key="authenticationUtils" type="service" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.BfY1APm" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.FiG9V0A" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminOptionController::delete" type="service" id=".service_locator.YGrP2Nl"/>
         <argument key="App\Controller\Admin\AdminOptionController::edit" type="service" id=".service_locator.YGrP2Nl"/>
         <argument key="App\Controller\Admin\AdminOptionController::index" type="service" id=".service_locator.SuHfSRw"/>
+        <argument key="App\Controller\Admin\AdminPictureController::delete" type="service" id=".service_locator.4YbvVID"/>
         <argument key="App\Controller\Admin\AdminPropertyController::delete" type="service" id=".service_locator.WCQZPh."/>
         <argument key="App\Controller\Admin\AdminPropertyController::edit" type="service" id=".service_locator.WCQZPh."/>
+        <argument key="App\Controller\ContactController::contact" type="service" id=".service_locator.5sWVEo_"/>
         <argument key="App\Controller\HomeController::index" type="service" id=".service_locator.DLYges2"/>
         <argument key="App\Controller\PropertyController::index" type="service" id=".service_locator.CY_hMZh"/>
         <argument key="App\Controller\PropertyController::show" type="service" id=".service_locator.WCQZPh."/>
@@ -6080,9 +6293,10 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.ofxohYI" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.g8hlY6p" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\ContactType" type="service" id="App\Form\ContactType"/>
         <argument key="App\Form\OptionType" type="service" id="App\Form\OptionType"/>
         <argument key="App\Form\PropertySearchType" type="service" id="App\Form\PropertySearchType"/>
         <argument key="App\Form\PropertyType" type="service" id="App\Form\PropertyType"/>
@@ -6254,10 +6468,11 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.epFE5c7" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.elJ8Ueb" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\OptionRepository" type="service" id="App\Repository\OptionRepository"/>
+        <argument key="App\Repository\PictureRepository" type="service" id="App\Repository\PictureRepository"/>
         <argument key="App\Repository\PropertyRepository" type="service" id="App\Repository\PropertyRepository"/>
         <argument key="App\Repository\UserRepository" type="service" id="App\Repository\UserRepository"/>
       </argument>
@@ -6316,9 +6531,21 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.pNNo5z3" method="withContext"/>
     </service>
+    <service id=".service_locator.pNNo5z3.App\Controller\Admin\AdminPictureController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\Admin\AdminPictureController"/>
+      <argument>App\Controller\Admin\AdminPictureController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.pNNo5z3" method="withContext"/>
+    </service>
     <service id=".service_locator.pNNo5z3.App\Controller\Admin\AdminPropertyController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\Admin\AdminPropertyController"/>
       <argument>App\Controller\Admin\AdminPropertyController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.pNNo5z3" method="withContext"/>
+    </service>
+    <service id=".service_locator.pNNo5z3.App\Controller\ContactController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\ContactController"/>
+      <argument>App\Controller\ContactController</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.pNNo5z3" method="withContext"/>
     </service>
@@ -6479,12 +6706,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.BfY1APm"/>
+      <argument type="service" id=".service_locator.FiG9V0A"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.BfY1APm"/>
+      <argument type="service" id=".service_locator.FiG9V0A"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -6495,9 +6722,10 @@
       <factory class="Symfony\Component\HttpClient\HttpClient" method="create"/>
     </service>
     <service id=".errored..service_locator.YGrP2Nl.App\Entity\Option" class="App\Entity\Option"/>
+    <service id=".errored..service_locator.4YbvVID.App\Entity\Picture" class="App\Entity\Picture"/>
     <service id=".errored..service_locator.WCQZPh..App\Entity\Property" class="App\Entity\Property"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
-      <argument type="service" id=".service_locator.OBq7guw"/>
+      <argument type="service" id=".service_locator.XHW0lle"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -6566,6 +6794,9 @@
         <argument key="vich:mapping:list-classes">vich_uploader.command.mapping_list_classes</argument>
         <argument key="liip:imagine:cache:remove">liip_imagine.command.cache_remove</argument>
         <argument key="liip:imagine:cache:resolve">liip_imagine.command.cache_resolve</argument>
+        <argument key="debug:swiftmailer">swiftmailer.command.debug</argument>
+        <argument key="swiftmailer:email:send">swiftmailer.command.new_email</argument>
+        <argument key="swiftmailer:spool:send">swiftmailer.command.send_email</argument>
         <argument key="make:auth">maker.auto_command.make_auth</argument>
         <argument key="make:command">maker.auto_command.make_command</argument>
         <argument key="make:controller">maker.auto_command.make_controller</argument>
@@ -6586,7 +6817,7 @@
         <argument key="make:migration">maker.auto_command.make_migration</argument>
       </argument>
     </service>
-    <service id=".service_locator.OBq7guw" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.XHW0lle" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service" id="console.command.about"/>
@@ -6668,6 +6899,9 @@
         <argument key="maker.auto_command.make_voter" type="service" id="maker.auto_command.make_voter"/>
         <argument key="monolog.command.server_log" type="service" id="monolog.command.server_log"/>
         <argument key="security.command.user_password_encoder" type="service" id="security.command.user_password_encoder"/>
+        <argument key="swiftmailer.command.debug" type="service" id="swiftmailer.command.debug"/>
+        <argument key="swiftmailer.command.new_email" type="service" id="swiftmailer.command.new_email"/>
+        <argument key="swiftmailer.command.send_email" type="service" id="swiftmailer.command.send_email"/>
         <argument key="twig.command.debug" type="service" id="twig.command.debug"/>
         <argument key="twig.command.lint" type="service" id="twig.command.lint"/>
         <argument key="var_dumper.command.server_dump" type="service" id="var_dumper.command.server_dump"/>
@@ -6787,7 +7021,7 @@
     <service id="form.choice_list_factory" alias="form.choice_list_factory.cached" public="false"/>
     <service id="Symfony\Component\Asset\Packages" alias="assets.packages" public="false"/>
     <service id="Symfony\Contracts\HttpClient\HttpClientInterface" alias=".debug.http_client"/>
-    <service id="mailer" alias="mailer.mailer"/>
+    <service id="mailer" alias="swiftmailer.mailer.default" public="true"/>
     <service id="Symfony\Component\Mailer\MailerInterface" alias="mailer.mailer"/>
     <service id="Symfony\Component\Mailer\Transport\TransportInterface" alias="mailer.default_transport"/>
     <service id="Symfony\Component\Notifier\NotifierInterface" alias="notifier"/>
@@ -6894,9 +7128,20 @@
     <service id="Liip\ImagineBundle\Imagine\Cache\CacheManager" alias="liip_imagine.cache.manager" public="false"/>
     <service id="Liip\ImagineBundle\Imagine\Data\DataManager" alias="liip_imagine.data.manager" public="false"/>
     <service id="Liip\ImagineBundle\Imagine\Filter\FilterManager" alias="liip_imagine.filter.manager" public="false"/>
+    <service id="swiftmailer.mailer.default.transport" alias="swiftmailer.mailer.default.transport.spool"/>
+    <service id="swiftmailer.mailer.default.spool" alias="swiftmailer.mailer.default.spool.memory"/>
+    <service id="swiftmailer.mailer.default.transport.real" alias="swiftmailer.mailer.default.transport.dynamic" public="true"/>
+    <service id="swiftmailer.spool" alias="swiftmailer.mailer.default.spool.memory"/>
+    <service id="swiftmailer.transport.real" alias="swiftmailer.mailer.default.transport.dynamic"/>
+    <service id="Swift_Spool" alias="swiftmailer.mailer.default.spool.memory" public="false"/>
+    <service id="swiftmailer.plugin.messagelogger" alias="swiftmailer.mailer.default.plugin.messagelogger"/>
+    <service id="swiftmailer.mailer" alias="swiftmailer.mailer.default"/>
+    <service id="swiftmailer.transport" alias="swiftmailer.mailer.default.transport.spool" public="true"/>
+    <service id="Swift_Mailer" alias="swiftmailer.mailer.default" public="false"/>
+    <service id="Swift_Transport" alias="swiftmailer.mailer.default.transport.spool" public="false"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.BfY1APm"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.FiG9V0A"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

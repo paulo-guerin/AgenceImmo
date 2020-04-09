@@ -6,8 +6,8 @@
     <div class="jumbotron">
         <div class="container">
             {{ form_start(form) }}
-                <div class="form-row align-items-end">
-                    <div class="col">
+                <div class="form-row align-items">
+                    <div class="col-md-4">
                         {{ form_row(form.minSurface) }}
                     </div>
                     <div class="col">
@@ -16,8 +16,8 @@
                     <div class="col">
                         {{ form_row(form.options) }}
                     </div>
-                    <div class="col">
-                        {# <div class="btn btn-primary">Rechercher</div> #}
+                    <div class=""col>
+                        <button type="submit" class="submitFilter btn btn-primary">Rechercher</button>
                     </div>
                 </div>
             {{ form_end(form) }}

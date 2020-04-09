@@ -1,15 +1,15 @@
 .propertyPrice {
-  font-size: 2rem !important;
-  font-weight: bold !important;
-  color: #007bff !important;
+  color: #007bff;
+  font-size: 2em;
+  font-weight: bold;
 }
 
-body .nimbus-is-editor .jumbotron .container .row .col-md-4 h1 .coco {
-  color: #007bff !important;
+.submitFilter {
+  margin-top: 1.9em;
 }
 
-h1 {
-  color: blue;
+.pagination {
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style.css.map */

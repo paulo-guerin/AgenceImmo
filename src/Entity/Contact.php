@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Contact 
+class Contact
 {
     /**
      * @var string|null
@@ -24,7 +24,7 @@ class Contact
      * @var string|null
      * @Assert\NotBlank()
      * @Assert\Regex(
-     * pattern="\[0-9]{10}/"
+     * pattern="/[0-9]{10}/"
      * 
      * )
      */
@@ -33,7 +33,7 @@ class Contact
     /**
      * @var string|null
      * @Assert\NotBlank()
-     * @Assert\Email
+     * @Assert\Email()
      */
     private $email;
 

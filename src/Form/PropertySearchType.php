@@ -18,28 +18,25 @@ class PropertySearchType extends AbstractType
         $builder
             ->add('minSurface', IntegerType::class, [
                 'required' => false,
-                'label' => false,
                 'attr' => [
-                    'placeholder' => 'Surface minimale'
+                    'placeholder' => 'm²'
                 ]
             ])
             ->add('maxPrice', IntegerType::class, [
                 'required' => false,
-                'label' => false,
                 'attr' => [
-                    'placeholder' => 'Budget max'
+                    'placeholder' => '€'
                 ]
             ])
             ->add('options', EntityType::class, [
                 'required' => false,
-                'label' => false,
                 'class' => Option::class,
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => "Rechercher",
-            ])
+            // ->add('submit', SubmitType::class, [
+            //     'label' => "Rechercher",
+            // ])
         ;
     }
 
@@ -49,6 +46,7 @@ class PropertySearchType extends AbstractType
             'data_class' => PropertySearch::class,
             'method' => 'get',
             'csrf_protection' => false,
+            'translation_domain' => 'forms',
         ]);
     }
 

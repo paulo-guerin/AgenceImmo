@@ -1,4 +1,13 @@
-@import "libs/header.scss";
-@import "libs/footer.scss";
-@import "libs/content.scss";
-@import "libs/responsive.scss";
+.propertyPrice {
+    color: #007bff;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.submitFilter {
+    margin-top: 1.9em;
+}
+
+.pagination {
+    justify-content: center;
+}
