@@ -4,29 +4,31 @@
 
 {% block body %}
 
-<div class="jumbotron text-center">
-    <div class="container">
+    <div class="jumbotron jumbotron-home text-center">
+        <div class="container mt-5">
 
-    {% for message in app.flashes ('success') %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>           
-    {% endfor %}
+            {% for message in app.flashes ('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>           
+            {% endfor %}
 
-        <h1>L'agence Immo</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus ipsam sed debitis dolor ducimus fugiat blanditiis facere quidem sapiente harum atque praesentium quasi, quibusdam, ipsa officia. Ratione nemo possimus facere.</p>
+            <h1>L'Agence Immo</h1>
+            <p style="font-family: Montserrat, Bold;">L'AgenceImmo vous propose des annonces immobilières de ventes pour votre projet immobilier d'achat, d'investissement ou de location. Si vous souhaitez mettre en vente votre logement, contactez nous pour une estimation de votre bien immobilier.</div>
     </div>
-</div>
 
-<div class="container">
-    <h2>Les derniers biens</h2>
-    <div class="row flex">
-    {% for property in properties %}
-        <div class="col-3">
-            {% include "property/_property.html.twig" %}
+    <div class="home">
+        <div class="container mt-4">
+            <h2>Nos derniers biens</h2>
+            <hr>
+            <div class="row flex">
+            {% for property in properties %}
+                <div class="col">
+                    {% include "property/_property.html.twig" %}
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-</div>
+    </div>
 
 {% endblock %}
 

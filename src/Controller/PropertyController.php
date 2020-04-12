@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\Property;
 use App\Entity\PropertySearch;
+use App\Form\ContactType;
 use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -60,17 +61,34 @@ class PropertyController extends AbstractController
      * @param Property $property
      * @return Response
      */
-    public function show(Property $property, string $slug): Response
+    public function show(Property $property, string $slug, Request $request, ContactController $contactController, \Swift_Mailer $mailer): Response
     {
         if ($property->getSlug() !== $slug) {
             return $this->redirectToRoute('property.show', [
-                'id' => $property->getId(),
-                'slug' => $property->getSlug(),
+                'id'    => $property->getId(),
+                'slug'  => $property->getSlug(),
             ], 301);
         }
+
+        // Formulaire de contact lié à un bien
+        $contact = new Contact();
+        $contact->setProperty($property);
+        $form = $this->createForm(ContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contactController->contact($request, $mailer);
+            $this->addFlash('success', 'Votre mail a bien été envoyé, merci. Nous y répondrons dès que possible.');
+            return $this->redirectToRoute('property.show', [
+                'id'    => $property->getId(),
+                'slug'  => $property->getSlug(),
+            ]);
+        }
+
         return $this->render('property/show.html.twig', [
             'current_menu' => 'properties',
             'property'     => $property,
+            'form'         => $form->createView(),
         ]);
     }
 

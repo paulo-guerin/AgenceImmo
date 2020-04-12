@@ -3,32 +3,66 @@
 {% block title property.title %}
 
 {% block body %}
+
     <div class="jumbotron">
         <div class="container">
+
+            {% for message in app.flashes ('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>           
+            {% endfor %}
+
+            {% if not form.vars.valid %}
+                <div class="alert alert-danger mb-4">
+                    Erreur, vous n'avez pas correctement rempli le formulaire de contact.
+                </div>           
+            {% endif %}
+
             <div class="row">
-                <div class="col-md-8">
-                    {% if property.pictures is empty %}
-                        <img src="{{ '/media/properties/360x230.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
-                    {% else %}
-                        {% for picture in property.pictures %}
-                            <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
-                        {% endfor %}
-                    {% endif %}
+                <div class="col-md-7">
+                    <div class="slider-slick">
+                        {% if property.pictures is empty %}
+                            <img src="{{ '/media/properties/360x230.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                        {% else %}
+                            {% for picture in property.pictures %}
+                                <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="show-text col-md-4">
                     <h1>{{ property.title }}</h1>
-                    <h2>{{ property.rooms }} pièces - {{ property.surface }} m²</h2>
+                    <h3>{{ property.rooms }} pièces - {{ property.surface }} m²</h3>
                     <div class="propertyPrice">{{ property.formatedPrice }} €</div>
                     <p class="mt-2">{{ property.description | nl2br }}</p>
-                    <a href="{{ path('contact') }}" class="btn btn-primary mt-2">Contacter l'agence</a>   
+                    <a href="{{ path('contact') }}" class="btn btn-primary mt-2" id="contactButton" {% if form.vars.submitted %} style="display: none" {% endif %}>Contacter l'agence</a>
+                    <div id="contactForm" class="mt-4" {% if not form.vars.submitted %} style="display: none" {% endif %}>
+                        {{ form_start(form) }}
+                            <div class="row">
+                                <div class="col">{{ form_row(form.firstname) }}</div>                                   
+                                <div class="col">{{ form_row(form.lastname) }}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col">{{ form_row(form.phone) }}</div>                                   
+                                <div class="col">{{ form_row(form.email) }}</div>
+                            </div>
+                        {{ form_rest(form) }}
+                        <div class="form-group">
+                            <button class="btn btn-primary">Envoyer</button>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-7">
                 <h2>Caractéristiques</h2>
+                <hr>
                 <table class="table table-striped">
                     <tr>
                         <td>Surface habitable</td>
@@ -52,8 +86,9 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">                          
+            <div class="show-options col-md-4">                          
                 <h2>Spécificités</h2>
+                <hr>
                 <ul class="list-group">
                     {% if property.options is empty %}
                         <p>Aucunes spécificités</p>

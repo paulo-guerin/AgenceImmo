@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Contact;
-use App\Entity\Property;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,6 +36,7 @@ class ContactController extends AbstractController
 
         return $this->render('emails/contact.html.twig',
             [
+                'current_menu'  => 'contact',
                 'contactForm' => $form->createView(),
             ]
         );

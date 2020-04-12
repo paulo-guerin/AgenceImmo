@@ -8,7 +8,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-
     /**
      * @Route("/login", name="login")
      */
@@ -17,15 +16,10 @@ class SecurityController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastusername = $authenticationUtils->getLastUsername();
         return $this->render('security/login.html.twig', [
+            'current_menu'  => 'login',
             'last_username' => $lastusername,
             'error' => $error,
         ]);
     }
-
-
-
-
-
-
 }
 

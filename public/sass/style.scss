@@ -1,13 +1,8 @@
-.propertyPrice {
-    color: #007bff;
-    font-size: 2em;
-    font-weight: bold;
-}
+@import "libs/variables.scss";
+@import "libs/general.scss";
+@import "libs/header.scss";
 
-.submitFilter {
-    margin-top: 1.9em;
-}
-
-.pagination {
-    justify-content: center;
-}
+@import "libs/home.scss";
+@import "libs/property.scss";
+@import "libs/show.scss";
+@import "libs/contact.scss";

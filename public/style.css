@@ -1,15 +1,81 @@
+.jumbotron {
+  border-radius: inherit;
+}
+
+.logo {
+  width: 50px;
+  margin-right: 1em;
+}
+.logo img {
+  width: 100%;
+}
+
+.jumbotron-home {
+  background: url("./media/banniere.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 475px;
+  position: relative;
+  z-index: 0;
+}
+.jumbotron-home:after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #1d1e1f, rgba(113, 117, 119, 0));
+}
+.jumbotron-home h1 {
+  color: white;
+}
+.jumbotron-home p {
+  color: white;
+}
+
+.home {
+  width: 70%;
+  margin: auto;
+}
+
+/*# sourceMappingURL=style.css.map */
 .propertyPrice {
   color: #007bff;
   font-size: 2em;
   font-weight: bold;
 }
 
-.submitFilter {
+.jumbotron-properties-index {
+  background: url("./media/banniere.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 323px;
+}
+.jumbotron-properties-index .submitFilter {
   margin-top: 1.9em;
 }
+.jumbotron-properties-index label {
+  font-weight: 700;
+}
 
-.pagination {
+.properties-index {
+  width: 70%;
+  margin: auto;
+}
+.properties-index .pagination {
   justify-content: center;
+  margin-top: 1em;
+}
+
+.show-text, .show-options {
+  margin-left: 4em;
+}
+
+.contact {
+  width: 50%;
+  margin: auto;
 }
 
 /*# sourceMappingURL=style.css.map */

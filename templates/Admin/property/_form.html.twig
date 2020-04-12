@@ -1,7 +1,7 @@
   {{ form_start(form) }}
     <div class="row">
         <div class="col-md-8">
-            <div class="col-md-2">{{ form_row(form.sold) }}</div>
+            <div>{{ form_row(form.sold) }}</div>
             <div class="row">
                 <div class="col-md-4">{{ form_row(form.title) }}</div>
                 <div class="col-md-2">{{ form_row(form.surface) }}</div>
@@ -29,13 +29,7 @@
         <div class="col-md-5">{{ form_row(form.address) }}</div>
         <div class="col-md-3">{{ form_row(form.city) }}</div>
         <div class="col-md-2">{{ form_row(form.postalCode) }}</div>
-        <div class="col-md-2">{{ form_row(form.pictureFiles) }}
-            {# {% if property.filename %}
-                <img src="{{ vich_uploader_asset(property, 'imageFile') | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height: auto;">  
-            {% else %}
-                <img src="{{ '/images/properties/360x230.jpg' | imagine_filter('thumb') }}" alt="card-img-top" style="width: 100%; height: auto;">
-            {% endif %} #}
-        </div>
+        <div class="col-md-2">{{ form_row(form.pictureFiles) }}</div>
     </div>
     {{ form_rest(form) }}
         <button class="btn btn-primary">{{ button|default('Enregistrer') }}</button>

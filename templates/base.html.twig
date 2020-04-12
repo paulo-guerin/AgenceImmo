@@ -3,13 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}AgenceImmo{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
-        <link rel="stylesheet" href="{{ asset('../public/style.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('slick-1.8.1/slick/slick-theme.css') }}"/>
+        <link rel="stylesheet" type="text/css" href="{{ asset('slick-1.8.1/slick/slick.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('style.css') }}">
     {% block stylesheets %}{% endblock %}
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="logo" href="{{ path('home') }}"><img src="{{ asset('media/logo.jpg') }}"></a>
         <a class="navbar-brand" href="{{ path('home') }}">Agence Immo</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,25 +21,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}" href="{{ path('property.index') }}">Acheter <span class="sr-only">(current)</span></a>
-                </li>                
+                    <a class="nav-link {% if current_menu is defined and current_menu == 'properties' %}active{% endif %}" 
+                    href="{{ path('property.index') }}">Acheter <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ path('contact') }}" class="nav-link {% if current_menu is defined and current_menu == 'contact' %}active{% endif %}">Contact</a>
+                </li>  
+            </ul>        
+            <ul class="nav navbar-nav navbar-right">               
                 {% if app.user %}
                     <div class="navbar-nav">
                         <div class="li nav-item">
-                            <a href="{{ path('logout') }}" class="nav-link">Se déconnecter</a>
+                            <a href="{{ path('admin.property.index') }}" class="nav-link {% if current_menu is defined and current_menu == 'admin' %}active{% endif %}">Espace Admin</a>
                         </div>
                         <div class="li nav-item">
-                            <a href="{{ path('admin.property.index') }}" class="nav-link">Espace Admin</a>
-                        </div>
-                    </div> 
-                {% else %}  
-                    <li class="nav-item">
-                        <a href="{{ path('login') }}" class="nav-link">Se connecter</a>
-                    </li>              
-                {% endif %}
-                <li class="nav-item">
-                    <a href="{{ path('contact') }}" class="nav-link">Contact</a>
-                </li>
+                            <a href="{{ path('logout') }}" class="nav-link pull-right">Se déconnecter</a>
+                        </div>                       
+                    </div>
+                {% else %}
+                    <li class="nav-item ml-auto">
+                        <a href="{{ path('login') }}" class="nav-link {% if current_menu is defined and current_menu == 'login' %}active{% endif %}">Se connecter</a>
+                    </li>
+                {% endif %}               
             </ul>               
         </div>
     </nav>
@@ -46,6 +53,11 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>           
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
         <script>$('select').select2();</script>
-        <script type="text/javascript" src="{{ asset('../public/js/script.js') }}"></script>
+
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="{{ asset('slick-1.8.1/slick/slick.min.js') }}"></script>
+
+        <script type="text/javascript" src="{{ asset('js/script.js') }}"></script>
     </body>
 </html>

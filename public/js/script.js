@@ -1,6 +1,6 @@
 console.log('HELLO');
 
-// Suppression des éléments
+// AJAX Suppression des images Espace Admin
 document.querySelectorAll('[data-delete]').forEach(a => {
     a.addEventListener('click', e => {
         e.preventDefault()
@@ -22,3 +22,18 @@ document.querySelectorAll('[data-delete]').forEach(a => {
         .catch(e => alert(e))
     })
 })
+
+// Carousel show
+$('.slider-slick').slick({
+    dots: true,
+    arrows: true
+});
+
+// Formualire de contact show au clic du bouton Contacter
+$('#contactButton').click(e => {
+    e.preventDefault()
+    $('#contactForm').slideDown();
+    $('#contactButton').slideUp();
+})
+  
+

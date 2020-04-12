@@ -3,20 +3,23 @@
 {% block title "Tous nos biens" %}
 
 {% block body %}
-    <div class="jumbotron">
-        <div class="container">
+
+    <div class="jumbotron jumbotron-properties-index">
+        <div class="container mt-3">
+            <h2>Filtrer les biens</h2>
+            <hr>
             {{ form_start(form) }}
                 <div class="form-row align-items">
-                    <div class="col-md-4">
+                    <div class="col-3">
                         {{ form_row(form.minSurface) }}
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         {{ form_row(form.maxPrice) }}
                     </div>
-                    <div class="col">
+                    <div class="col-3">
                         {{ form_row(form.options) }}
                     </div>
-                    <div class=""col>
+                    <div class="col-3">
                         <button type="submit" class="submitFilter btn btn-primary">Rechercher</button>
                     </div>
                 </div>
@@ -24,17 +27,22 @@
         </div>
     </div>
 
-    <div class="container mt-4">
-        <h1>Voir tous nos biens</h1>
-        <div class="row">
-            {% for property in properties %}
-                <div class="col-md-4">
-                    {% include "property/_property.html.twig" %}
-                </div>
-            {% endfor %}
-        </div>    
-        <div class="pagination">
-            {{ knp_pagination_render(properties) }}
-        </div>  
+    <div class="properties-index">
+        <div class="container mt-5">
+            <h2>Voir tous nos biens</h2>
+            <hr>
+            <div class="row">
+                {% for property in properties %}
+                    <div class="col-md-4">
+                        {% include "property/_property.html.twig" %}
+                    </div>
+                {% endfor %}
+            </div>    
+            <div class="pagination">
+                {{ knp_pagination_render(properties) }}
+            </div>  
+        </div>
     </div>
+
+    
 {% endblock %}

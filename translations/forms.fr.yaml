@@ -1,5 +1,7 @@
+# Formulaire Espace Admin
 Title: Titre
-Price: Prix
+Surface: Surface (m²)
+Price: Prix (€)
 Rooms: Pièces
 Bedrooms: Chambres
 Heat: Chauffage
@@ -9,6 +11,12 @@ City: Ville
 Postal code: Code Postal
 Sold: Vendu
 
-Min surface: Surface minimale
-Max price: Prix maximal
+# Filtres de recherche
+Min surface: Surface minimale (m²)
+Max price: Prix maximal (€)
 Options: Spécificités
+
+# Formulaire de contact
+Firstname: Prénom
+Lastname: Nom
+Phone: Téléphone

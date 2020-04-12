@@ -342,8 +342,8 @@
         <parameter key="filters" type="collection">
           <parameter key="thumbnail" type="collection">
             <parameter key="size" type="collection">
-              <parameter>800</parameter>
-              <parameter>530</parameter>
+              <parameter>720</parameter>
+              <parameter>460</parameter>
             </parameter>
             <parameter key="mode">outbound</parameter>
           </parameter>
@@ -6212,13 +6212,21 @@
         <argument key="paginator" type="service" id="knp_paginator"/>
       </argument>
     </service>
+    <service id=".service_locator.Uz0Psf9" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="contactController" type="service" id="App\Controller\ContactController"/>
+        <argument key="mailer" type="service" id="swiftmailer.mailer.default"/>
+        <argument key="property" type="service" id=".errored..service_locator.Uz0Psf9.App\Entity\Property"/>
+      </argument>
+    </service>
     <service id=".service_locator.q6jLs_L" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="authenticationUtils" type="service" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.FiG9V0A" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.z5Vv2lg" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\AdminOptionController::delete" type="service" id=".service_locator.YGrP2Nl"/>
@@ -6230,7 +6238,7 @@
         <argument key="App\Controller\ContactController::contact" type="service" id=".service_locator.5sWVEo_"/>
         <argument key="App\Controller\HomeController::index" type="service" id=".service_locator.DLYges2"/>
         <argument key="App\Controller\PropertyController::index" type="service" id=".service_locator.CY_hMZh"/>
-        <argument key="App\Controller\PropertyController::show" type="service" id=".service_locator.WCQZPh."/>
+        <argument key="App\Controller\PropertyController::show" type="service" id=".service_locator.Uz0Psf9"/>
         <argument key="App\Controller\SecurityController::login" type="service" id=".service_locator.q6jLs_L"/>
       </argument>
     </service>
@@ -6706,12 +6714,12 @@
       <argument type="service" id="security.token_storage"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver" public="false">
-      <argument type="service" id=".service_locator.FiG9V0A"/>
+      <argument type="service" id=".service_locator.z5Vv2lg"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver" public="false"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver" public="false"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver" public="false">
-      <argument type="service" id=".service_locator.FiG9V0A"/>
+      <argument type="service" id=".service_locator.z5Vv2lg"/>
     </service>
     <service id=".debug.http_client.inner" class="Symfony\Contracts\HttpClient\HttpClientInterface" public="false">
       <argument type="collection"/>
@@ -6724,6 +6732,7 @@
     <service id=".errored..service_locator.YGrP2Nl.App\Entity\Option" class="App\Entity\Option"/>
     <service id=".errored..service_locator.4YbvVID.App\Entity\Picture" class="App\Entity\Picture"/>
     <service id=".errored..service_locator.WCQZPh..App\Entity\Property" class="App\Entity\Property"/>
+    <service id=".errored..service_locator.Uz0Psf9.App\Entity\Property" class="App\Entity\Property"/>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <argument type="service" id=".service_locator.XHW0lle"/>
       <argument type="collection">
@@ -7141,7 +7150,7 @@
     <service id="Swift_Transport" alias="swiftmailer.mailer.default.transport.spool" public="false"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.CmORmuK" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem" public="false"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.FiG9V0A"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.z5Vv2lg"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
     <service id="Psr\Log\LoggerInterface $consoleLogger" alias="monolog.logger.console"/>

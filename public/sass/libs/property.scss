@@ -1,0 +1,39 @@
+.propertyPrice {
+    color: #007bff;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.jumbotron-properties-index {
+    background: url("./media/banniere.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 323px;
+    .submitFilter {
+        margin-top: 1.9em;
+    }
+    label {
+        font-weight: 700;
+    }
+}
+
+.properties-index {
+    width: 70%;
+    margin: auto;
+    .pagination {
+        justify-content: center;
+        margin-top: 1em;       
+    }
+}
+
+
+
+
+
+
+
+
+  
+  
+  
+  
