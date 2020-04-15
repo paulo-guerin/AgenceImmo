@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminPropertyController extends AbstractController
 {
-
     /**
      * @var PropertyRepository
      */
@@ -53,9 +52,6 @@ class AdminPropertyController extends AbstractController
             'form'          => $form->createView(),
         ]);
     }
-
-    
-    
 
     /**
      * @Route("/admin/property/create", name="admin.property.new")
@@ -105,6 +101,7 @@ class AdminPropertyController extends AbstractController
             $this->em->remove($property);
             $this->em->flush();
         }
+        $this->addFlash('success', 'Bien supprimé avec succès.');
         return $this->redirectToRoute("admin.property.index");
     }
 }

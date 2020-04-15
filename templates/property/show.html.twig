@@ -3,21 +3,10 @@
 {% block title property.title %}
 
 {% block main %}
+    {{ include('block/_flash_messages_form.html.twig') }}
 
     <div class="jumbotron">
         <div class="container">
-
-            {% for message in app.flashes ('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>           
-            {% endfor %}
-
-            {% if not form.vars.valid %}
-                <div class="alert alert-danger mb-4">
-                    Erreur, vous n'avez pas correctement rempli le formulaire de contact.
-                </div>           
-            {% endif %}
 
             <div class="row">
                 <div class="col-md-7">

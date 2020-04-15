@@ -1,0 +1,14 @@
+{% for message in app.flashes ('success') %}
+    <div class="alert alert-success" style="margin-bottom: inherit;">
+        {{ message }}
+    </div>           
+{% endfor %}
+
+{% if not contactForm.vars.valid %}
+    <div class="alert alert-danger" style="margin-bottom: inherit;">
+        Erreur, vous n'avez pas correctement rempli le formulaire de contact.
+    </div>           
+{% endif %}
+
+
+

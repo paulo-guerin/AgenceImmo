@@ -33,7 +33,7 @@ class ContactController extends AbstractController
             ->setFrom($contact->getEmail())
             ->setTo('florian.vidal@lapiscine.pro')
             ->setReplyTo($contact->getEmail())
-            ->setBody($this->renderView('emails/model2.html.twig', [
+            ->setBody($this->renderView('emails/model-show.html.twig', [
                 'contact' => $contact,
             ]), 'text/html')
         ;
@@ -56,13 +56,13 @@ class ContactController extends AbstractController
                 ->setFrom($contact->getEmail())
                 ->setTo('florian.vidal@lapiscine.pro')
                 ->setReplyTo($contact->getEmail())
-                ->setBody($this->renderView('emails/model2.html.twig', [
+                ->setBody($this->renderView('emails/model-type.html.twig', [
                     'contact' => $contact,
                 ]), 'text/html')
             ;
     
             $mailer->send($message);
-            return $this->redirectToRoute('home');
+            // return $this->redirectToRoute('home');
         }
 
         return $this->render('emails/contact.html.twig',

@@ -20,15 +20,10 @@ class PropertySearchType extends AbstractType
         $builder
             ->add('minSurface', IntegerType::class, [
                 'required' => false,
-                // 'attr' => [
-                //     'placeholder' => 'm²'
-                // ]
+
             ])
             ->add('maxPrice', IntegerType::class, [
                 'required' => false,
-                // 'attr' => [
-                //     'placeholder' => '€'
-                // ]
             ])
             ->add('options', EntityType::class, [
                 'required' => false,

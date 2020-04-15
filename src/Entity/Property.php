@@ -130,11 +130,6 @@ class Property
      */
     private $lng;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $Type;
-
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -378,7 +373,6 @@ class Property
             $this->pictures[] = $picture;
             $picture->setProperty($this);
         }
-
         return $this;
     }
 

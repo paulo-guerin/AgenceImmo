@@ -6,13 +6,6 @@
 
     <div class="jumbotron jumbotron-home text-center">
         <div class="container mt-5">
-
-            {% for message in app.flashes ('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>           
-            {% endfor %}
-
             <h1>L'Agence Immo</h1>
             <p style="font-family: Montserrat, Bold;">L'AgenceImmo vous propose des annonces immobilières de ventes pour votre projet immobilier d'achat, d'investissement ou de location. Si vous souhaitez mettre en vente votre logement, contactez nous pour une estimation de votre bien immobilier.</p>
         </div>
@@ -31,5 +24,4 @@
     </div>
 
 {% endblock %}
-
 

@@ -3,6 +3,7 @@
 {% block title 'Gérer les biens' %}
 
 {% block main %}
+    {{ include('block/_flash_messages_form.html.twig') }}
 
     <div class="jumbotron jumbotron-properties-index">
         <div class="container mt-3">
@@ -46,12 +47,6 @@
             </div>
         </div>
         <hr style="margin-top: inherit">
-
-        {% for message in app.flashes ('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>           
-        {% endfor %}
 
         <table class="table table-striped">
             <tbody>                           

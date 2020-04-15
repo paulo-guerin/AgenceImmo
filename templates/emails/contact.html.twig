@@ -3,19 +3,13 @@
 {% block title 'Formulaire de contact' %}
 
 {% block main %}
+    {{ include('block/_flash_messages_contactForm.html.twig') }}
 
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-7">
                 <h2>Formulaire de contact</h2>
                 <hr>
-
-                {% if not contactForm.vars.valid %}
-                    <div class="alert alert-danger mt-4">
-                        Erreur, vous n'avez pas correctement rempli le formulaire de contact.
-                    </div>           
-                {% endif %}
-
                 <div id="contactForm" class="mt-4">
                     {{ form_start(contactForm) }}
                         <div class="row mb-4">
@@ -32,13 +26,14 @@
                     </div>
                     {{ form_end(contactForm) }}
                 </div> 
-            </div>
-         
-        </div>
-        
+            </div>        
+        </div>        
     </div>
     
 {% endblock %}
+
+{% block footer %}{% endblock %}
+
 
 
 
