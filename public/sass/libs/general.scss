@@ -1,4 +1,57 @@
+body {
+    font-family: Montserrat;
+}
+
 .jumbotron {
     border-radius: inherit;
 }
+
+.leaflet-marker-icon {
+    width: 30px;
+}
+
+.pagination {
+    justify-content: center;
+    margin-top: 1em;       
+}
+
+// Champs Options
+.select2-selection--multiple {
+    height: 38px !important;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem !important;
+}
+
+// Champs Distance
+.select2-selection--single {
+    height: 38px !important;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem !important;
+    .select2-selection__rendered {
+        line-height: 38px !important;
+    }
+    .select2-selection__arrow {
+        top: 5px !important;
+    }
+}
+
+// Grille - Liste
+.grid, .list {
+    border: black 1px solid;
+    width: 65px;
+    height: 65px;
+    img {
+        width: 75%;
+    }
+}
+
+
+
+// Boutons
+.title-button-display-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 

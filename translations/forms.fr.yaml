@@ -12,9 +12,9 @@ Postal code: Code Postal
 Sold: Vendu
 
 # Filtres de recherche
-Min surface: Surface minimale (m²)
-Max price: Prix maximal (€)
-Options: Spécificités
+Min surface: Surface min (m²)
+Max price: Prix max (€)
+Options: Options (ascenseur, balcon, jardin ...)
 
 # Formulaire de contact
 Firstname: Prénom

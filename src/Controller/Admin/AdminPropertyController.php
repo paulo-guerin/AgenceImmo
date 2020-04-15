@@ -3,11 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Property;
+use App\Entity\PropertySearch;
+use App\Form\PropertySearchType;
 use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminPropertyController extends AbstractController
@@ -27,15 +31,31 @@ class AdminPropertyController extends AbstractController
     /**
      * @Route("/admin", name="admin.property.index")
      */
-    public function index()
+    public function index(PaginatorInterface $paginator, Request $request): Response
     {
-        $properties = $this->repository->findAll();
-        return $this->render('admin/property/index.html.twig', [
-            'properties' => $properties,
-            'current_menu'  => 'admin',
+        // Créer une entité qui représenter notre recherche
+        $search = new PropertySearch();
 
+        // Créer un formulaire
+        $form = $this->createForm(PropertySearchType::class, $search);
+
+        // Gérer le traitement dans le controller
+        $form->handleRequest($request);
+
+        $properties = $paginator->paginate(
+            $this->repository->findAllVisibleQuery($search),
+            $request->query->getInt('page', 1),
+            12
+        );
+        return $this->render('admin/property/index.html.twig', [
+            'current_menu'  => 'admin',
+            'properties'    => $properties,
+            'form'          => $form->createView(),
         ]);
     }
+
+    
+    
 
     /**
      * @Route("/admin/property/create", name="admin.property.new")
@@ -78,7 +98,7 @@ class AdminPropertyController extends AbstractController
     }
 
     /**
-     * @Route("/admin/property/delete{id}", name="admin.property.delete")
+     * @Route("/admin/property/delete{id}", name="admin.property.delete", )
      */
     public function delete(Property $property, Request $request){
         if($this->isCsrfTokenValid('delete'.$property->getId(), $request->get('_token'))){

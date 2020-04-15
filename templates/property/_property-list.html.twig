@@ -1,0 +1,22 @@
+<table class="table table-striped">
+    <tbody>
+        {% for property in properties %}       
+            <tr>
+                <td>
+                    {% if property.picture %}
+                        <img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('mini') }}" alt="card-img-top">  
+                    {% else %}
+                        <img src="{{ '/media/properties/180x115.jpg' | imagine_filter('mini') }}" alt="card-img-top" >
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path ('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
+                    <p class="card-text">{{ property.surface }} m² - {{ property.city }} ({{ property.postalCode }})</p>
+                    <div class="propertyPrice">{{ property.formatedPrice }} €</div>
+                <td style="vertical-align: inherit;">
+                    <a href="{{ path ('property.show', {id: property.id, slug: property.slug}) }}" class="btn btn-primary">Voir le bien</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

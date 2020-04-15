@@ -1,10 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title %}Options{% endblock %}
 
-<div class="container mt-4">
-    <h1>Créer une nouvelle option</h1>
-    {{ include ('admin/option/_form.html.twig', {button: 'Créer'}) }}
-</div>
+{% block main %}
+
+    <div class="container mt-4">
+        <h1>Créer une nouvelle option</h1>
+        {{ include ('admin/option/_form.html.twig', {button: 'Créer'}) }}
+    </div>
 
 {% endblock %}
+
+{% block footer %}{% endblock %}

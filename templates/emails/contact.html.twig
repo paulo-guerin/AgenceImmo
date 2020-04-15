@@ -1,37 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block title 'Formulaire de contact' %}
 
-    <div class="contact">
-        <div class="container mt-4">
-            <h1>Formulaire de contact</h1>
-            <hr>
+{% block main %}
 
-            {% if not contactForm.vars.valid %}
-                <div class="alert alert-danger mt-4">
-                    Erreur, vous n'avez pas correctement rempli le formulaire de contact.
-                </div>           
-            {% endif %}
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <h2>Formulaire de contact</h2>
+                <hr>
 
-            <div id="contactForm" class="mt-4">
-                {{ form_start(contactForm) }}
-                    <div class="row">
-                        <div class="col">{{ form_row(contactForm.firstname) }}</div>                                   
-                        <div class="col">{{ form_row(contactForm.lastname) }}</div>
+                {% if not contactForm.vars.valid %}
+                    <div class="alert alert-danger mt-4">
+                        Erreur, vous n'avez pas correctement rempli le formulaire de contact.
+                    </div>           
+                {% endif %}
+
+                <div id="contactForm" class="mt-4">
+                    {{ form_start(contactForm) }}
+                        <div class="row mb-4">
+                            <div class="col">{{ form_row(contactForm.firstname) }}</div>                                   
+                            <div class="col">{{ form_row(contactForm.lastname) }}</div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">{{ form_row(contactForm.phone) }}</div>                                   
+                            <div class="col">{{ form_row(contactForm.email) }}</div>
+                        </div>
+                    {{ form_rest(contactForm) }}
+                    <div class="form-group">
+                        <button class="btn btn-primary">Envoyer</button>
                     </div>
-                    <div class="row">
-                        <div class="col">{{ form_row(contactForm.phone) }}</div>                                   
-                        <div class="col">{{ form_row(contactForm.email) }}</div>
-                    </div>
-                {{ form_rest(contactForm) }}
-                <div class="form-group">
-                    <button class="btn btn-primary">Envoyer</button>
-                </div>
-                {{ form_end(contactForm) }}
-            </div>  
+                    {{ form_end(contactForm) }}
+                </div> 
+            </div>
+         
         </div>
+        
     </div>
     
 {% endblock %}
+
+
 
         

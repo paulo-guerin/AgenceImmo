@@ -250,7 +250,8 @@
                         <table>
                           <tr>
                             <td>
-                              <h1>Demande de contact</h1>
+                              <h1>Demande de contact à propos du bien 
+                                <a href="{{ url('property.show', {id: contact.property.id, slug: contact.property.slug}) }}">{{ contact.property.title }}</a>                              </h1>
                             </td>
                           </tr>
                         </table>

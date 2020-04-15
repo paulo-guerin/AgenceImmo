@@ -19,6 +19,7 @@ return [
     'admin.option.new' => [[], ['_controller' => 'App\\Controller\\Admin\\AdminOptionController::new'], [], [['text', '/admin/option/new']], [], []],
     'admin.option.edit' => [['id'], ['_controller' => 'App\\Controller\\Admin\\AdminOptionController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/admin/option']], [], []],
     'admin.option.delete' => [['id'], ['_controller' => 'App\\Controller\\Admin\\AdminOptionController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/option']], [], []],
+    'admin.option.show' => [['id'], ['_controller' => 'App\\Controller\\Admin\\AdminOptionController::show'], [], [['text', '/show'], ['variable', '/', '[^/]++', 'id', true], ['text', '/admin/option']], [], []],
     'admin.picture.delete' => [['id'], ['_controller' => 'App\\Controller\\Admin\\AdminPictureController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/picture']], [], []],
     'admin.property.index' => [[], ['_controller' => 'App\\Controller\\Admin\\AdminPropertyController::index'], [], [['text', '/admin']], [], []],
     'admin.property.new' => [[], ['_controller' => 'App\\Controller\\Admin\\AdminPropertyController::new'], [], [['text', '/admin/property/create']], [], []],

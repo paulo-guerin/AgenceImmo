@@ -2,7 +2,7 @@
 
 {% block title property.title %}
 
-{% block body %}
+{% block main %}
 
     <div class="jumbotron">
         <div class="container">
@@ -26,17 +26,20 @@
                             <img src="{{ '/media/properties/360x230.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
                         {% else %}
                             {% for picture in property.pictures %}
-                                <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                                <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%;">
                             {% endfor %}
                         {% endif %}
                     </div>
                 </div>
                 <div class="show-text col-md-4">
-                    <h1>{{ property.title }}</h1>
+                    <h2>{{ property.title }}</h2>
                     <h3>{{ property.rooms }} pièces - {{ property.surface }} m²</h3>
                     <div class="propertyPrice">{{ property.formatedPrice }} €</div>
                     <p class="mt-2">{{ property.description | nl2br }}</p>
-                    <a href="{{ path('contact') }}" class="btn btn-primary mt-2" id="contactButton" {% if form.vars.submitted %} style="display: none" {% endif %}>Contacter l'agence</a>
+                    <a href="{{ path('contact') }}" class="btn btn-primary mt-2" id="contactButton" {% if form.vars.submitted %} 
+                    style="display: none" {% endif %}>Contacter l'agence</a>
+
+                    {# Formulaire de contact #}
                     <div id="contactForm" class="mt-4" {% if not form.vars.submitted %} style="display: none" {% endif %}>
                         {{ form_start(form) }}
                             <div class="row">
@@ -65,6 +68,10 @@
                 <hr>
                 <table class="table table-striped">
                     <tr>
+                        <td>Adresse</td>
+                        <td>{{ property.address }}</td>
+                    </tr>
+                    <tr>
                         <td>Surface habitable</td>
                         <td>{{ property.surface }} m²</td>
                     </tr>
@@ -79,10 +86,6 @@
                     <tr>
                         <td>Etage</td>
                         <td>{{ property.floor }}</td>
-                    </tr>
-                    <tr>
-                        <td>Chauffage</td>
-                        <td>{{ property.heatType }}</td>
                     </tr>
                 </table>
             </div>
@@ -100,6 +103,7 @@
                 </ul>
             </div>
         </div>
+    <div id="map" style="width: 100%; height: 400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
     </div>   
 {% endblock %}
 

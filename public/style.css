@@ -1,5 +1,51 @@
+body {
+  font-family: Montserrat;
+}
+
 .jumbotron {
   border-radius: inherit;
+}
+
+.leaflet-marker-icon {
+  width: 30px;
+}
+
+.pagination {
+  justify-content: center;
+  margin-top: 1em;
+}
+
+.select2-selection--multiple {
+  height: 38px !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem !important;
+}
+
+.select2-selection--single {
+  height: 38px !important;
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem !important;
+}
+.select2-selection--single .select2-selection__rendered {
+  line-height: 38px !important;
+}
+.select2-selection--single .select2-selection__arrow {
+  top: 5px !important;
+}
+
+.grid, .list {
+  border: black 1px solid;
+  width: 65px;
+  height: 65px;
+}
+.grid img, .list img {
+  width: 75%;
+}
+
+.title-button-display-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
@@ -8,6 +54,20 @@
 }
 .logo img {
   width: 100%;
+}
+
+footer {
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#feffff+0,d2ebf9+100;Blue+3D+%2312 */
+  background: #feffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #feffff 0%, #d2ebf9 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #feffff 0%, #d2ebf9 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #feffff 0%, #d2ebf9 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#feffff", endColorstr="#d2ebf9",GradientType=0 );
+  /* IE6-9 */
 }
 
 .jumbotron-home {
@@ -35,11 +95,6 @@
   color: white;
 }
 
-.home {
-  width: 70%;
-  margin: auto;
-}
-
 /*# sourceMappingURL=style.css.map */
 .propertyPrice {
   color: #007bff;
@@ -51,7 +106,18 @@
   background: url("./media/banniere.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  height: 323px;
+  position: relative;
+  z-index: 0;
+}
+.jumbotron-properties-index:after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(180deg, #e5e8eb, rgba(227, 231, 233, 0));
 }
 .jumbotron-properties-index .submitFilter {
   margin-top: 1.9em;
@@ -60,21 +126,17 @@
   font-weight: 700;
 }
 
-.properties-index {
-  width: 70%;
-  margin: auto;
-}
-.properties-index .pagination {
-  justify-content: center;
-  margin-top: 1em;
+.slider-slick {
+  width: 635px;
+  height: 460px;
 }
 
 .show-text, .show-options {
   margin-left: 4em;
 }
 
-.contact {
-  width: 50%;
+.login {
+  width: 30%;
   margin: auto;
 }
 

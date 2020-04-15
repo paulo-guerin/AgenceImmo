@@ -8,7 +8,18 @@
     background: url("./media/banniere.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 323px;
+    position: relative;
+    z-index: 0;
+    &:after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(180deg,#e5e8eb,rgba(227, 231, 233, 0));
+    }
     .submitFilter {
         margin-top: 1.9em;
     }
@@ -17,14 +28,12 @@
     }
 }
 
-.properties-index {
-    width: 70%;
-    margin: auto;
-    .pagination {
-        justify-content: center;
-        margin-top: 1em;       
-    }
+
+.slider-slick {
+    width: 635px;
+    height: 460px;
 }
+
 
 
 

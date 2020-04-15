@@ -147,7 +147,6 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
-            'EasyCorp\\EasyLog\\' => 17,
         ),
         'D' => 
         array (
@@ -166,6 +165,7 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
             'Doctrine\\Bundle\\MigrationsBundle\\' => 33,
             'Doctrine\\Bundle\\FixturesBundle\\' => 31,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
+            'DoctrineExtensions\\' => 19,
         ),
         'C' => 
         array (
@@ -537,10 +537,6 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         array (
             0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
         ),
-        'EasyCorp\\EasyLog\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/easycorp/easy-log-handler/src',
-        ),
         'Doctrine\\Persistence\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/persistence/lib/Doctrine/Persistence',
@@ -603,6 +599,10 @@ class ComposerStaticInit531c0d242bc4185e6f22efebfec0b235
         'Doctrine\\Bundle\\DoctrineBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/doctrine-bundle',
+        ),
+        'DoctrineExtensions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/beberlei/doctrineextensions/src',
         ),
         'Cocur\\Slugify\\' => 
         array (

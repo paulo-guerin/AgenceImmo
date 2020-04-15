@@ -2,7 +2,7 @@
 
 {% block title 'Accueil' %}
 
-{% block body %}
+{% block main %}
 
     <div class="jumbotron jumbotron-home text-center">
         <div class="container mt-5">
@@ -14,16 +14,16 @@
             {% endfor %}
 
             <h1>L'Agence Immo</h1>
-            <p style="font-family: Montserrat, Bold;">L'AgenceImmo vous propose des annonces immobilières de ventes pour votre projet immobilier d'achat, d'investissement ou de location. Si vous souhaitez mettre en vente votre logement, contactez nous pour une estimation de votre bien immobilier.</div>
+            <p style="font-family: Montserrat, Bold;">L'AgenceImmo vous propose des annonces immobilières de ventes pour votre projet immobilier d'achat, d'investissement ou de location. Si vous souhaitez mettre en vente votre logement, contactez nous pour une estimation de votre bien immobilier.</p>
+        </div>
     </div>
 
-    <div class="home">
-        <div class="container mt-4">
-            <h2>Nos derniers biens</h2>
-            <hr>
-            <div class="row flex">
+    <div class="container mt-4">
+        <h2>Nos derniers biens</h2>
+        <hr>
+        <div class="row flex">
             {% for property in properties %}
-                <div class="col">
+                <div class="col-md-3">
                     {% include "property/_property.html.twig" %}
                 </div>
             {% endfor %}
@@ -31,4 +31,5 @@
     </div>
 
 {% endblock %}
+
 

@@ -2,10 +2,18 @@
 
 {% block title 'Gérer les options' %}
 
-{% block body %}
+{% block main %}
 
     <div class="container mt-4">
-        <h1>Gérer les options</h1>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <h2>Gérer les options</h2>
+            </div>
+            <div class="col-6 text-right align-self-center">
+                <a href="{{ path('admin.option.new') }}" class="btn btn-primary">Créer une nouvelle option</a>
+            </div>
+        </div>
 
         {% for message in app.flashes ('success') %}
             <div class="alert alert-success">
@@ -26,19 +34,18 @@
                         <td>{{ option.name }}</td>
                         <td>
                             <a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
-                            <a href="{{ path('admin.option.delete', {id: option.id, _token: csrf_token ( 'delete' ~ option.id )}) }}" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ path('admin.option.delete', {id: option.id, _token: csrf_token ( 'delete' ~ option.id )}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer ?')" class="btn btn-danger">Supprimer</a>
+                            <a href="{{ path('admin.option.show', {id: option.id}) }}" class="btn btn-primary">Voir l'option</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <div class="text-right">
-        <a href="{{ path('admin.option.new') }}" class="btn btn-primary">Créer un nouveau bien</a>
-        </div>
-
-
     </div>
-    
+
 {% endblock %}
+
+{% block footer %}{% endblock %}
+
 

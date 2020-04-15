@@ -61,34 +61,33 @@ class PropertyController extends AbstractController
      * @param Property $property
      * @return Response
      */
-    public function show(Property $property, string $slug, Request $request, ContactController $contactController, \Swift_Mailer $mailer): Response
+    public function show(Property $property, string $slug, Request $request, ContactController $contactController): Response
     {
         if ($property->getSlug() !== $slug) {
             return $this->redirectToRoute('property.show', [
-                'id'    => $property->getId(),
-                'slug'  => $property->getSlug(),
+                'id'   => $property->getId(),
+                'slug' => $property->getSlug()
             ], 301);
         }
 
-        // Formulaire de contact lié à un bien
         $contact = new Contact();
         $contact->setProperty($property);
-        $form = $this->createForm(ContactType::class);
+        $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $contactController->contact($request, $mailer);
+            $contactController->contactShow($contact);
             $this->addFlash('success', 'Votre mail a bien été envoyé, merci. Nous y répondrons dès que possible.');
             return $this->redirectToRoute('property.show', [
-                'id'    => $property->getId(),
-                'slug'  => $property->getSlug(),
+                'id'   => $property->getId(),
+                'slug' => $property->getSlug()
             ]);
         }
 
         return $this->render('property/show.html.twig', [
-            'current_menu' => 'properties',
             'property'     => $property,
-            'form'         => $form->createView(),
+            'current_menu' => 'properties',
+            'form'         => $form->createView()
         ]);
     }
 

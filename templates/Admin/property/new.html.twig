@@ -2,19 +2,14 @@
 
 {% block title 'Gérer les biens' %}
 
-{% block body %}
+{% block main %}
 
-<div class="container mt-4">
-    <h1>Créer un nouveau bien</h1>
-    <hr>
-    {{ include ('admin/property/_form.html.twig', {button: 'Créer'}) }}
-</div>
-
-{% endblock %}
-
-{% block stylesheets %}
-{% endblock %}
-
-{% block javascript %}
+    <div class="container mt-4">
+        <h1>Créer un nouveau bien</h1>
+        <hr>
+        {{ include ('admin/property/_form.html.twig', {button: 'Créer'}) }}
+    </div>
     
 {% endblock %}
+
+{% block footer %}{% endblock %}
