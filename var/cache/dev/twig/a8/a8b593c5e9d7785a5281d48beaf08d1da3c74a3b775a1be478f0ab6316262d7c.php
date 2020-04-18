@@ -47,27 +47,29 @@ class __TwigTemplate_1d3318aff34244c69c2af2b4a3e20c2df1d451d96ad691b56d3cc5172ba
 
 ";
         // line 13
-        echo "
+        echo "<script src=\"https://unpkg.com/leaflet@1.6.0/dist/leaflet.js\"></script>
+
 ";
-        // line 15
+        // line 16
         echo "<script src=\"https://cdn.jsdelivr.net/npm/places.js@1.18.1\"></script>
 
 ";
-        // line 18
+        // line 19
         echo "<script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("slick-1.8.1/slick/slick.min.js"), "html", null, true);
         echo "\"></script>
+<script type=\"text/javascript\" src=\"//code.jquery.com/jquery-migrate-1.2.1.min.js\"></script>
 
 ";
-        // line 21
+        // line 23
         echo "<script src=\"https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js\"></script>
 
 ";
-        // line 24
+        // line 26
         echo "<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js\" integrity=\"sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6\" crossorigin=\"anonymous\"></script>           
 
 ";
-        // line 27
+        // line 29
         echo "<script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/script.js"), "html", null, true);
         echo "\"></script>         ";
@@ -91,7 +93,7 @@ class __TwigTemplate_1d3318aff34244c69c2af2b4a3e20c2df1d451d96ad691b56d3cc5172ba
 
     public function getDebugInfo()
     {
-        return array (  71 => 27,  67 => 24,  63 => 21,  57 => 18,  53 => 15,  50 => 13,  46 => 10,  43 => 8,);
+        return array (  73 => 29,  69 => 26,  65 => 23,  58 => 19,  54 => 16,  50 => 13,  46 => 10,  43 => 8,);
     }
 
     public function getSourceContext()
@@ -108,12 +110,14 @@ class __TwigTemplate_1d3318aff34244c69c2af2b4a3e20c2df1d451d96ad691b56d3cc5172ba
 <script src=\"https://code.jquery.com/jquery-3.5.0.min.js\" integrity=\"sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=\" crossorigin=\"anonymous\"></script>
 
 {# MAP #}
+<script src=\"https://unpkg.com/leaflet@1.6.0/dist/leaflet.js\"></script>
 
 {# Autocompletion localisation #}
 <script src=\"https://cdn.jsdelivr.net/npm/places.js@1.18.1\"></script>
 
 {# Caroussel #}
 <script type=\"text/javascript\" src=\"{{ asset('slick-1.8.1/slick/slick.min.js') }}\"></script>
+<script type=\"text/javascript\" src=\"//code.jquery.com/jquery-migrate-1.2.1.min.js\"></script>
 
 {# Options #}
 <script src=\"https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js\"></script>

@@ -54,17 +54,21 @@ class __TwigTemplate_28983b25430761463a65d3deeea2686ca7022e00bd36e5c4985ed4c0764
         echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("slick-1.8.1/slick/slick.css"), "html", null, true);
         echo "\"/>
+<link rel=\"stylesheet\" type=\"text/css\" href=\"";
+        // line 12
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("slick-1.8.1/slick/slick-theme.css"), "html", null, true);
+        echo "\"/>
 
 ";
-        // line 14
+        // line 15
         echo "<link href=\"https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css\" rel=\"stylesheet\" />
 
 ";
-        // line 17
+        // line 18
         echo "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css\" integrity=\"sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh\" crossorigin=\"anonymous\">
 
 ";
-        // line 20
+        // line 21
         echo "<link rel=\"stylesheet\" href=\"";
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("style.css"), "html", null, true);
         echo "\">";
@@ -88,7 +92,7 @@ class __TwigTemplate_28983b25430761463a65d3deeea2686ca7022e00bd36e5c4985ed4c0764
 
     public function getDebugInfo()
     {
-        return array (  68 => 20,  64 => 17,  60 => 14,  54 => 11,  50 => 8,  47 => 6,  43 => 2,);
+        return array (  72 => 21,  68 => 18,  64 => 15,  59 => 12,  54 => 11,  50 => 8,  47 => 6,  43 => 2,);
     }
 
     public function getSourceContext()
@@ -104,6 +108,7 @@ class __TwigTemplate_28983b25430761463a65d3deeea2686ca7022e00bd36e5c4985ed4c0764
 
 {# Caroussel #}
 <link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('slick-1.8.1/slick/slick.css') }}\"/>
+<link rel=\"stylesheet\" type=\"text/css\" href=\"{{ asset('slick-1.8.1/slick/slick-theme.css') }}\"/>
 
 {# Select2 #}
 <link href=\"https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css\" rel=\"stylesheet\" />
