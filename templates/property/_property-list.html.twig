@@ -4,9 +4,9 @@
             <tr>
                 <td>
                     {% if property.picture %}
-                        <img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('mini') }}" alt="card-img-top">  
+                        <img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('mini') }}" class="card-img-top">  
                     {% else %}
-                        <img src="{{ '/media/properties/180x115.jpg' | imagine_filter('mini') }}" alt="card-img-top" >
+                        <img src="{{ '/media/properties/180x115.jpg' | imagine_filter('mini') }}" class="card-img-top" >
                     {% endif %}
                 </td>
                 <td>

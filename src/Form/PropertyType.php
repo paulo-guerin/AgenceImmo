@@ -41,8 +41,7 @@ class PropertyType extends AbstractType
                 ],
                 'attr' => [
                     'placeholder' => 'jpg, jpeg'
-                ]
-                
+                ]               
             ])
             ->add('city')
             ->add('address')
@@ -50,6 +49,7 @@ class PropertyType extends AbstractType
             ->add('postalCode')
             ->add('lat', HiddenType::class)
             ->add('lng', HiddenType::class)
+            ->add('sold')
         ;
     }
 

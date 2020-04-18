@@ -107,7 +107,7 @@ footer {
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  z-index: 0;
+  z-index: 1;
 }
 .jumbotron-properties-index:after {
   content: "";
@@ -120,19 +120,18 @@ footer {
   background: linear-gradient(180deg, #e5e8eb, rgba(227, 231, 233, 0));
 }
 .jumbotron-properties-index .submitFilter {
-  margin-top: 1.9em;
+  margin-top: 1.95em;
 }
 .jumbotron-properties-index label {
   font-weight: 700;
 }
 
-.slider-slick {
-  width: 635px;
-  height: 460px;
-}
-
 .show-text, .show-options {
   margin-left: 4em;
+}
+
+.slider-slick {
+  width: 630px;
 }
 
 .login {

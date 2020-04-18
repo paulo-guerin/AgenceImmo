@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{% block title %}AgenceImmo{% endblock %}</title>
+    <title>{% block title %}AgenceImmo{% endblock %}</title>
 
-        {% block stylesheets %}{% include "block/_stylesheets.html.twig" %}{% endblock %}    
-    </head>
-    <body>
-        <header>
-            {% block header %}{% include "block/_header.html.twig" %}{% endblock %}
-        </header>
-        
-        <main>
-            {% block main %}{% endblock %}
-        </main>
+    {% block stylesheets %}{% include "block/_stylesheets.html.twig" %}{% endblock %}    
+</head>
+<body>
+    <header>
+        {% block header %}{% include "block/_header.html.twig" %}{% endblock %}
+    </header>
+    
+    <main>
+        {% block main %}{% endblock %}
+    </main>
 
-        <footer>
-            {% block footer %}{% include "block/_footer.html.twig" %}{% endblock %}
-        </footer>
+    <footer>
+        {% block footer %}{% include "block/_footer.html.twig" %}{% endblock %}
+    </footer>
 
 
-        {% block javascripts %}{% include "block/_scripts.html.twig" %}{% endblock %}   
-    </body>
+    {% block javascripts %}{% include "block/_scripts.html.twig" %}{% endblock %}   
+</body>
 </html>

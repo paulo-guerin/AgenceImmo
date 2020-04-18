@@ -43,7 +43,7 @@ class Property
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Range(min=1, max=10000)
+     * @Assert\Range(min=1, max=100000)
      */
     private $surface;
 
@@ -63,6 +63,7 @@ class Property
     private $floor;
 
     /**
+     * @Assert\Range(min=1, max=100000000)
      * @ORM\Column(type="integer")
      */
     private $price;
@@ -104,7 +105,7 @@ class Property
     private $options;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true))
      */
     private $updated_at;
 
@@ -121,12 +122,12 @@ class Property
     private $pictureFiles;
 
     /**
-     * @ORM\Column(type="float", scale=4, precision=6)
+     * @ORM\Column(type="float", scale=4, precision=6, nullable=true)
      */
     private $lat;
 
     /**
-     * @ORM\Column(type="float", scale=4, precision=7)
+     * @ORM\Column(type="float", scale=4, precision=7, nullable=true)
      */
     private $lng;
 

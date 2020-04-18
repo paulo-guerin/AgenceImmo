@@ -3,14 +3,14 @@
 {% block title 'Gérer les biens' %}
 
 {% block main %}
-    {{ include('block/_flash_messages_form.html.twig') }}
+    {# {{ include('block/_flash_messages_form.html.twig') }} #}
 
     <div class="jumbotron jumbotron-properties-index">
         <div class="container mt-3">
             <h2>Filtrer les biens</h2>
             <hr>
             {{ form_start(form) }}
-                <div class="form-row align-items">
+                <div class="form-row">
                     <div class="col-2">
                         {{ form_row(form.minSurface) }}
                     </div>
@@ -54,11 +54,11 @@
                     <tr>
                         <td>
                             {% if property.picture %}
-                                <img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('mini') }}" alt="card-img-top">  
+                                <img src="{{ vich_uploader_asset(property.picture, 'imageFile') | imagine_filter('mini') }}" class="card-img-top">  
                             {% endif %}
                         </td>
                         <td>
-                            <a href="{{ path ('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
+                            <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}">{{ property.title }}</a>
                             <p class="card-text">{{ property.surface }} m² - {{ property.city }} ({{ property.postalCode }})</p>
                             <div class="propertyPrice">{{ property.formatedPrice }} €</div>
                         <td style="vertical-align: inherit;">

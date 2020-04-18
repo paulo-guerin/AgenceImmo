@@ -20,7 +20,6 @@ class PropertySearchType extends AbstractType
         $builder
             ->add('minSurface', IntegerType::class, [
                 'required' => false,
-
             ])
             ->add('maxPrice', IntegerType::class, [
                 'required' => false,
@@ -36,8 +35,19 @@ class PropertySearchType extends AbstractType
                 'label'       => false,
              ])
             ->add('distance', ChoiceType::class, [
+                'required' => false,
                 'choices' => [
+                    '5km' => 5,
                     '10km' => 10,
+                    '20km' => 20,
+                    '40km' => 40,
+                    '60km' => 60,
+                    '80km' => 80,
+                    '100km' => 100,
+                    '200km' => 200,
+                    '400km' => 400,
+                    '600km' => 600,
+                    '800km' => 800,
                     '1000km' => 1000,
                 ]
             ])

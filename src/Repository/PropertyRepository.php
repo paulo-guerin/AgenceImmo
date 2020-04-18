@@ -6,7 +6,9 @@ use App\Entity\Property;
 use App\Entity\PropertySearch;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Query\Expr\OrderBy as ExprOrderBy;
 use Doctrine\ORM\QueryBuilder;
 
 /**
@@ -14,6 +16,7 @@ use Doctrine\ORM\QueryBuilder;
  * @method Property|null findOneBy(array $criteria, array $orderBy = null)
  * @method Property[]    findAll()
  * @method Property[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @ORM\OrderBy({"order" = "DESC", "title" = "DESC"})
  */
 class PropertyRepository extends ServiceEntityRepository
 {
@@ -65,15 +68,31 @@ class PropertyRepository extends ServiceEntityRepository
         return $query->getQuery();
     }
 
+    // Retourne les 12 derniers biens vers la home
     /**
      * @return Property[]
      */
-    public function findLatest(): array
+    public function findLatest()
     {
         return $this->findVisibleQuery()
-            ->setMaxResults(8)
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(12)
             ->getQuery()
-            ->getResult();
+            ->getResult()
+        ;
+    }
+
+    // Retourne les biens selon leur prix
+    /**
+     * @return Property[]
+     */
+    public function findByPrice()
+    {
+        return $this->findVisibleQuery()
+            ->orderBy('p.price', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     private function findVisibleQuery(): QueryBuilder
@@ -82,9 +101,13 @@ class PropertyRepository extends ServiceEntityRepository
         ->where('p.sold = false');
     }
 
+    
+
+    
+
     // /**
-    //  * @return Property[] Returns an array of Property objects
-    //  */
+    // * @return Property[] Returns an array of Property objects
+    // */
     /*
     public function findByExampleField($value)
     {

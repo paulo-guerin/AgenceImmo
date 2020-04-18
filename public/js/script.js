@@ -77,6 +77,9 @@ $('.slider-slick').slick({
     arrows: true
 });
 
+$('select').select2();
+
+
 // Formulaire de contact show au clic du bouton Contacter
 $('#contactButton').click(e => {
     e.preventDefault()
@@ -96,6 +99,7 @@ $('.list').click(e => {
     $('.grid-index').hide();
     $('.list-index').show();
 })
+
 
 console.log('HELLO WORLD !!!');
 

@@ -12,10 +12,10 @@
                 <div class="col-md-7">
                     <div class="slider-slick">
                         {% if property.pictures is empty %}
-                            <img src="{{ '/media/properties/360x230.jpg' | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%; height:auto;">
+                            <img src="{{ '/media/properties/360x230.jpg' | imagine_filter('medium') }}" class="card-img-top" style="width: 100%;">
                         {% else %}
                             {% for picture in property.pictures %}
-                                <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" alt="card-img-top" style="width: 100%;">
+                                <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('medium') }}" class="card-img-top" style="width: 100%;">                           
                             {% endfor %}
                         {% endif %}
                     </div>
@@ -92,7 +92,7 @@
                 </ul>
             </div>
         </div>
-    <div id="map" style="width: 100%; height: 400px" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
+        <div id="map" style="width: 100%; height: 400px; margin-top: 4em; margin-bottom: 4em;" data-lat="{{ property.lat }}" data-lng="{{ property.lng }}"></div>
     </div>   
 {% endblock %}
 

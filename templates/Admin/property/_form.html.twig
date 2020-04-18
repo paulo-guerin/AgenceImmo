@@ -7,8 +7,7 @@
                 <div class="col-md-3">{{ form_row(form.surface) }}</div>
                 <div class="col-md-3">{{ form_row(form.price) }}</div>       
             </div>
-        </div>
-        
+        </div>      
     </div>
     <div class="row">
 
@@ -30,8 +29,7 @@
         {% for picture in property.pictures %}
             <div class="col-2">
                 <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('admin') }}" alt="">
-                {# <img src="{{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }}" alt="" style="width: 100px" placeholder="coucou"> #}
-                <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger" data-delete data-token="{{ csrf_token ( 'delete' ~ picture.id ) }}">Supprimer</a>
+                <a href="{{ path('admin.picture.delete', {id: picture.id}) }}" class="btn btn-danger mb-4" data-delete data-token="{{ csrf_token ( 'delete' ~ picture.id ) }}">Supprimer</a>
             </div>                
         {% endfor %}
     </div>

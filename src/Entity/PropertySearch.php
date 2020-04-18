@@ -15,7 +15,7 @@ class PropertySearch {
 
     /**
      * @var int|null
-     * @Assert\Range(min=10, max=400)
+     * @Assert\Range(min=10, max=10000)
      */
     private $minSurface;
 

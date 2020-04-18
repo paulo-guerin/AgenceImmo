@@ -384,8 +384,8 @@
         <parameter key="filters" type="collection">
           <parameter key="thumbnail" type="collection">
             <parameter key="size" type="collection">
-              <parameter>720</parameter>
-              <parameter>460</parameter>
+              <parameter>630</parameter>
+              <parameter>420</parameter>
             </parameter>
             <parameter key="mode">outbound</parameter>
           </parameter>

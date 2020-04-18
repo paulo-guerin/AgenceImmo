@@ -17,7 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PropertyController extends AbstractController
 {
-
     /**
      * @var PropertyRepository
      */
@@ -35,6 +34,7 @@ class PropertyController extends AbstractController
      */
     public function index(PaginatorInterface $paginator, Request $request): Response
     {
+
         // Créer une entité qui représenter notre recherche
         $search = new PropertySearch();
 
@@ -45,10 +45,12 @@ class PropertyController extends AbstractController
         $form->handleRequest($request);
 
         $properties = $paginator->paginate(
+
             $this->repository->findAllVisibleQuery($search),
             $request->query->getInt('page', 1),
             12
         );
+
         return $this->render("property/index.html.twig", [
             'current_menu'  => 'properties',
             'properties'    => $properties,
